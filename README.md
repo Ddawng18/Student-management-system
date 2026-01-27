@@ -7,4 +7,4 @@ Thông tin thành viên:
 @congbao2006: Lê Công Bảo.
 @Ddawmg18: Nguyễn Huỳnh Đăng.
 @Phunguyen11-02: Nguyễn Lâm Sỹ Phú.
-@banhthinh1975-crypto: Bành Phát Thịnh
+@banhthinh1975-crypto: Bành Phát Thịnh.
