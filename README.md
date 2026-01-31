@@ -85,7 +85,7 @@ Dự án được sử dụng cho mục đích học tập và nghiên cứu.
 
 
 # Thông tin thành viên:
-- **@congbao2006**: Lê Công Bảo.
-- **@Ddawmg18**: Nguyễn Huỳnh Đăng.
-- **@Phunguyen11-02**: Nguyễn Lâm Sỹ Phú.
-- **@banhthinh1975-crypto**: Bành Phát Thịnh.
+- **@congbao2006**: Lê Công Bảo: Thêm các chức năng chính cho chương trình.
+- **@Ddawmg18**: Nguyễn Huỳnh Đăng: Code các class Entity và các method đơn giản.
+- **@Phunguyen11-02**: Nguyễn Lâm Sỹ Phú: Xử lý các tầng lưu trữ(list/map).
+- **@banhthinh1975-crypto**: Bành Phát Thịnh: Sửa lỗi, tạo UI cho chương trình, tìm kiếm data và tài liệu.
