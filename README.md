@@ -44,6 +44,7 @@ Quan hệ nhiều–nhiều giữa sinh viên và môn học được giải quy
 ### Thiết kế hướng đối tượng (OOP)
 Mỗi thực thể trong hệ thống được ánh xạ thành một lớp đối tượng.  
 Các lớp quản lý (QuanLySinhVien, QuanLyMonHoc, QuanLyDangKy) được sử dụng để tách biệt xử lý nghiệp vụ khỏi dữ liệu, tuân thủ nguyên tắc Single Responsibility.
+![Use Case Diagram](images/usecase.png)
 
 ---
 
