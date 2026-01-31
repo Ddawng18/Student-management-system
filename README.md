@@ -31,7 +31,7 @@ Thiết kế được xây dựng với mục tiêu **dễ triển khai, dễ m�
 
 ---
 
-## 🧠hân tích & thiết kế hệ thống
+## Phân tích & thiết kế hệ thống
 
 ### Thiết kế xử lý (Use Case)
 Hệ thống được phân tích dựa trên các nghiệp vụ chính như quản lý sinh viên, đăng ký môn học và nhập điểm.  
