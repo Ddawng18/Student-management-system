@@ -130,23 +130,14 @@ namespace QuanLySinhVienApp
     {
         static void Main(string[] args)
         {
-            // Tạo sinh viên
             SinhVien sv1 = new SinhVien(1, "Nguyen Van A", "a@gmail.com", "CNTT1");
-
-            // Tạo môn học
             MonHoc mon1 = new MonHoc(101, "Lap Trinh C#", 3);
-
-            // Tạo giảng viên
             GiangVien gv1 = new GiangVien(10, "Tran Van B", "b@gmail.com");
-
-            // Sinh viên đăng ký môn
+            
             sv1.DangKyMonHoc(mon1);
-
-            // Giảng viên nhập điểm
             gv1.NhapDiem(sv1.DanhSachDangKy[0], 8.5f);
-
-            // Hiển thị kết quả
             sv1.HienThiThongTin();
+            
             Console.WriteLine("----- Ket Qua Hoc Tap -----");
             sv1.XemKetQua();
 
