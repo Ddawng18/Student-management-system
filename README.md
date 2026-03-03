@@ -83,7 +83,7 @@ Vì vậy có thể tạo một lớp cha chung:
 - họ tên
 - email
 - mã
-SinhVien sẽ kế thừa:
+- SinhVien sẽ kế thừa:
 - maSinhVien
 - hoTen
 - email
