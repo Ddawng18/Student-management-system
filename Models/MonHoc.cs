@@ -8,13 +8,17 @@ namespace StudentManagementSystem.Models
         public string TenMon { get; set; }
         public string MoTa { get; set; }
         public int SoTinChi { get; set; }
+        public int MaKhoa { get; set; }
+        public int MaGiangVien { get; set; }
 
-        public MonHoc(int maMonHoc, string tenMon, string moTa, int soTinChi)
+        public MonHoc(int maMonHoc, string tenMon, string moTa, int soTinChi, int maKhoa = 0, int maGiangVien = 0)
         {
             MaMonHoc = maMonHoc;
             TenMon = tenMon;
             MoTa = moTa;
             SoTinChi = soTinChi;
+            MaKhoa = maKhoa;
+            MaGiangVien = maGiangVien;
         }
 
         public void MoMonHoc()
@@ -24,7 +28,7 @@ namespace StudentManagementSystem.Models
 
         public override string ToString()
         {
-            return $"Mã môn: {MaMonHoc}, Tên môn: {TenMon}, Mô tả: {MoTa}, Số tín chỉ: {SoTinChi}";
+            return $"Mã môn: {MaMonHoc}, Tên môn: {TenMon}, Mô tả: {MoTa}, Số tín chỉ: {SoTinChi}, Mã khoa: {MaKhoa}, Mã GV: {MaGiangVien}";
         }
     }
 }

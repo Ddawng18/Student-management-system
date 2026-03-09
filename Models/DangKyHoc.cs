@@ -10,8 +10,9 @@ namespace StudentManagementSystem.Models
         public DateTime NgayDangKy { get; set; }
         public float Diem { get; set; }
         public string KetQua { get; set; }
+        public int MaHocKy { get; set; }
 
-        public DangKyHoc(int maDangKy, int maSinhVien, int maMonHoc, DateTime ngayDangKy)
+        public DangKyHoc(int maDangKy, int maSinhVien, int maMonHoc, DateTime ngayDangKy, int maHocKy = 0)
         {
             MaDangKy = maDangKy;
             MaSinhVien = maSinhVien;
@@ -19,6 +20,7 @@ namespace StudentManagementSystem.Models
             NgayDangKy = ngayDangKy;
             Diem = 0;
             KetQua = "Chưa có điểm";
+            MaHocKy = maHocKy;
         }
 
         public void TinhKetQua()
@@ -33,7 +35,7 @@ namespace StudentManagementSystem.Models
 
         public override string ToString()
         {
-            return $"Mã đăng ký: {MaDangKy}, Mã SV: {MaSinhVien}, Mã môn: {MaMonHoc}, Ngày đăng ký: {NgayDangKy.ToShortDateString()}, Điểm: {Diem}, Kết quả: {KetQua}";
+            return $"Mã đăng ký: {MaDangKy}, Mã SV: {MaSinhVien}, Mã môn: {MaMonHoc}, Ngày đăng ký: {NgayDangKy.ToShortDateString()}, Mã HK: {MaHocKy}, Điểm: {Diem}, Kết quả: {KetQua}";
         }
     }
 }

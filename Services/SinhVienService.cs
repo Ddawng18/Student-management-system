@@ -14,9 +14,9 @@ namespace StudentManagementSystem.Services
             _sinhVienRepository = sinhVienRepository;
         }
 
-        public void ThemSinhVien(string hoTen, string email, DateTime ngaySinh, string diaChi, string lop = "")
+        public void ThemSinhVien(string hoTen, string email, DateTime ngaySinh, string diaChi, int maKhoa = 0, int maLop = 0)
         {
-            var sinhVien = new SinhVien(0, hoTen, email, ngaySinh, diaChi, lop);
+            var sinhVien = new SinhVien(0, hoTen, email, ngaySinh, diaChi, maKhoa, maLop);
             _sinhVienRepository.ThemSinhVien(sinhVien);
         }
 
@@ -30,9 +30,9 @@ namespace StudentManagementSystem.Services
             return _sinhVienRepository.LaySinhVienTheoId(id);
         }
 
-        public void CapNhatSinhVien(int id, string hoTen, string email, DateTime ngaySinh, string diaChi, string lop = "")
+        public void CapNhatSinhVien(int id, string hoTen, string email, DateTime ngaySinh, string diaChi, int maKhoa = 0, int maLop = 0)
         {
-            var sinhVien = new SinhVien(id, hoTen, email, ngaySinh, diaChi, lop);
+            var sinhVien = new SinhVien(id, hoTen, email, ngaySinh, diaChi, maKhoa, maLop);
             _sinhVienRepository.CapNhatSinhVien(sinhVien);
         }
 

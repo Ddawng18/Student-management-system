@@ -13,9 +13,9 @@ namespace StudentManagementSystem.Services
             _lopHocRepository = lopHocRepository;
         }
 
-        public void ThemLopHoc(string tenLop)
+        public void ThemLopHoc(string tenLop, int maKhoa = 0)
         {
-            var lopHoc = new LopHoc(0, tenLop);
+            var lopHoc = new LopHoc(0, tenLop, maKhoa);
             _lopHocRepository.ThemLopHoc(lopHoc);
         }
 
@@ -29,9 +29,9 @@ namespace StudentManagementSystem.Services
             return _lopHocRepository.LayLopHocTheoId(id);
         }
 
-        public void CapNhatLopHoc(int id, string tenLop)
+        public void CapNhatLopHoc(int id, string tenLop, int maKhoa = 0)
         {
-            var lopHoc = new LopHoc(id, tenLop);
+            var lopHoc = new LopHoc(id, tenLop, maKhoa);
             _lopHocRepository.CapNhatLopHoc(lopHoc);
         }
 

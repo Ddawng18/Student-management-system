@@ -13,9 +13,9 @@ namespace StudentManagementSystem.Services
             _giangVienRepository = giangVienRepository;
         }
 
-        public void ThemGiangVien(string hoTen, string email)
+        public void ThemGiangVien(string hoTen, string email, int maKhoa = 0)
         {
-            var giangVien = new GiangVien(0, hoTen, email);
+            var giangVien = new GiangVien(0, hoTen, email, maKhoa);
             _giangVienRepository.ThemGiangVien(giangVien);
         }
 
@@ -29,9 +29,9 @@ namespace StudentManagementSystem.Services
             return _giangVienRepository.LayGiangVienTheoId(id);
         }
 
-        public void CapNhatGiangVien(int id, string hoTen, string email)
+        public void CapNhatGiangVien(int id, string hoTen, string email, int maKhoa = 0)
         {
-            var giangVien = new GiangVien(id, hoTen, email);
+            var giangVien = new GiangVien(id, hoTen, email, maKhoa);
             _giangVienRepository.CapNhatGiangVien(giangVien);
         }
 

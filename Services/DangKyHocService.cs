@@ -19,13 +19,13 @@ namespace StudentManagementSystem.Services
             _monHocRepository = monHocRepository;
         }
 
-        public void DangKyMonHoc(int maSinhVien, int maMonHoc)
+        public void DangKyMonHoc(int maSinhVien, int maMonHoc, int maHocKy = 0)
         {
             var sinhVien = _sinhVienRepository.LaySinhVienTheoId(maSinhVien);
             var monHoc = _monHocRepository.LayMonHocTheoId(maMonHoc);
             if (sinhVien != null && monHoc != null)
             {
-                var dangKyHoc = new DangKyHoc(0, maSinhVien, maMonHoc, DateTime.Now);
+                var dangKyHoc = new DangKyHoc(0, maSinhVien, maMonHoc, DateTime.Now, maHocKy);
                 _dangKyHocRepository.ThemDangKy(dangKyHoc);
             }
             else

@@ -13,9 +13,9 @@ namespace StudentManagementSystem.Services
             _monHocRepository = monHocRepository;
         }
 
-        public void ThemMonHoc(string tenMon, string moTa, int soTinChi)
+        public void ThemMonHoc(string tenMon, string moTa, int soTinChi, int maKhoa = 0, int maGiangVien = 0)
         {
-            var monHoc = new MonHoc(0, tenMon, moTa, soTinChi);
+            var monHoc = new MonHoc(0, tenMon, moTa, soTinChi, maKhoa, maGiangVien);
             _monHocRepository.ThemMonHoc(monHoc);
         }
 
@@ -29,9 +29,9 @@ namespace StudentManagementSystem.Services
             return _monHocRepository.LayMonHocTheoId(id);
         }
 
-        public void CapNhatMonHoc(int id, string tenMon, string moTa, int soTinChi)
+        public void CapNhatMonHoc(int id, string tenMon, string moTa, int soTinChi, int maKhoa = 0, int maGiangVien = 0)
         {
-            var monHoc = new MonHoc(id, tenMon, moTa, soTinChi);
+            var monHoc = new MonHoc(id, tenMon, moTa, soTinChi, maKhoa, maGiangVien);
             _monHocRepository.CapNhatMonHoc(monHoc);
         }
 
