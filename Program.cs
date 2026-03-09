@@ -1,147 +1,353 @@
 ﻿using System;
-using System.Collections.Generic;
+using StudentManagementSystem.Models;
+using StudentManagementSystem.Repositories;
+using StudentManagementSystem.Services;
 
-namespace QuanLySinhVienApp
+namespace StudentManagementSystem
 {
-    // ================= LỚP CHA =================
-    public class Nguoi
-    {
-        public string HoTen { get; set; }
-        public string Email { get; set; }
-
-        public Nguoi() { }
-
-        public Nguoi(string hoTen, string email)
-        {
-            HoTen = hoTen;
-            Email = email;
-        }
-
-        public virtual void HienThiThongTin()
-        {
-            Console.WriteLine($"Ho ten: {HoTen}");
-            Console.WriteLine($"Email: {Email}");
-        }
-    }
-
-    // ================= SINH VIÊN =================
-    public class SinhVien : Nguoi
-    {
-        public int MaSinhVien { get; set; }
-        public string Lop { get; set; }
-
-        public List<DangKyHoc> DanhSachDangKy { get; set; }
-
-        public SinhVien() 
-        {
-            DanhSachDangKy = new List<DangKyHoc>();
-        }
-
-        public SinhVien(int ma, string hoTen, string email, string lop)
-            : base(hoTen, email)
-        {
-            MaSinhVien = ma;
-            Lop = lop;
-            DanhSachDangKy = new List<DangKyHoc>();
-        }
-
-        public override void HienThiThongTin()
-        {
-            base.HienThiThongTin();
-            Console.WriteLine($"Ma SV: {MaSinhVien}");
-            Console.WriteLine($"Lop: {Lop}");
-        }
-
-        public void DangKyMonHoc(MonHoc mon)
-        {
-            DangKyHoc dk = new DangKyHoc(this, mon);
-            DanhSachDangKy.Add(dk);
-        }
-
-        public void XemKetQua()
-        {
-            foreach (var dk in DanhSachDangKy)
-            {
-                Console.WriteLine($"Mon: {dk.Mon.TenMon} - Diem: {dk.Diem} - Ket qua: {dk.KetQua}");
-            }
-        }
-    }
-
-    // ================= GIẢNG VIÊN =================
-    public class GiangVien : Nguoi
-    {
-        public int MaGiangVien { get; set; }
-
-        public GiangVien(int ma, string hoTen, string email)
-            : base(hoTen, email)
-        {
-            MaGiangVien = ma;
-        }
-
-        public void NhapDiem(DangKyHoc dangKy, float diem)
-        {
-            dangKy.Diem = diem;
-            dangKy.TinhKetQua();
-        }
-    }
-
-    // ================= MÔN HỌC =================
-    public class MonHoc
-    {
-        public int MaMonHoc { get; set; }
-        public string TenMon { get; set; }
-        public int SoTinChi { get; set; }
-
-        public MonHoc(int ma, string ten, int soTinChi)
-        {
-            MaMonHoc = ma;
-            TenMon = ten;
-            SoTinChi = soTinChi;
-        }
-    }
-
-    // ================= ĐĂNG KÝ HỌC =================
-    public class DangKyHoc
-    {
-        public SinhVien SinhVien { get; set; }
-        public MonHoc Mon { get; set; }
-        public float Diem { get; set; }
-        public string KetQua { get; set; }
-
-        public DangKyHoc(SinhVien sv, MonHoc mon)
-        {
-            SinhVien = sv;
-            Mon = mon;
-            Diem = 0;
-            KetQua = "Chua co diem";
-        }
-
-        public void TinhKetQua()
-        {
-            if (Diem >= 5)
-                KetQua = "Dat";
-            else
-                KetQua = "Rot";
-        }
-    }
-
-    // ================= Main =================
     class Program
     {
         static void Main(string[] args)
         {
-            SinhVien sv1 = new SinhVien(1, "Nguyen Van A", "a@gmail.com", "CNTT1");
-            MonHoc mon1 = new MonHoc(101, "Lap Trinh C#", 3);
-            GiangVien gv1 = new GiangVien(10, "Tran Van B", "b@gmail.com");
-            
-            sv1.DangKyMonHoc(mon1);
-            gv1.NhapDiem(sv1.DanhSachDangKy[0], 8.5f);
-            sv1.HienThiThongTin();
-            
-            Console.WriteLine("----- Ket Qua Hoc Tap -----");
-            sv1.XemKetQua();
+            // Khởi tạo repositories
+            var sinhVienRepo = new SinhVienRepository();
+            var monHocRepo = new MonHocRepository();
+            var dangKyHocRepo = new DangKyHocRepository();
 
-            Console.ReadLine();
+            // Khởi tạo services
+            var sinhVienService = new SinhVienService(sinhVienRepo);
+            var monHocService = new MonHocService(monHocRepo);
+            var dangKyHocService = new DangKyHocService(dangKyHocRepo, sinhVienRepo, monHocRepo);
+
+            // Dữ liệu mẫu
+            sinhVienService.ThemSinhVien("Nguyen Van A", "a@gmail.com", new DateTime(2000, 1, 1), "123 Main St");
+            monHocService.ThemMonHoc("Lap Trinh C#", "Hoc co ban C#", 3);
+            dangKyHocService.DangKyMonHoc(1, 1);
+
+            // Menu chính
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("He Thong Quan Ly Sinh Vien");
+                Console.WriteLine("1. Quan Ly Sinh Vien");
+                Console.WriteLine("2. Quan Ly Mon Hoc");
+                Console.WriteLine("3. Quan Ly Dang Ky Hoc");
+                Console.WriteLine("4. Thoat");
+                Console.Write("Chon mot tuy chon: ");
+
+                var choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        QuanLySinhVien(sinhVienService);
+                        break;
+                    case "2":
+                        QuanLyMonHoc(monHocService);
+                        break;
+                    case "3":
+                        QuanLyDangKyHoc(dangKyHocService);
+                        break;
+                    case "4":
+                        return;
+                    default:
+                        Console.WriteLine("Tuy chon khong hop le. Nhan bat ky phim nao de tiep tuc.");
+                        Console.ReadKey();
+                        break;
+                }
+            }
+        }
+
+        static void QuanLySinhVien(SinhVienService service)
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Quan Ly Sinh Vien");
+                Console.WriteLine("1. Them Sinh Vien");
+                Console.WriteLine("2. Xem Tat Ca Sinh Vien");
+                Console.WriteLine("3. Cap Nhat Sinh Vien");
+                Console.WriteLine("4. Xoa Sinh Vien");
+                Console.WriteLine("5. Quay Lai");
+                Console.Write("Chon mot tuy chon: ");
+
+                var choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        ThemSinhVien(service);
+                        break;
+                    case "2":
+                        XemSinhVien(service);
+                        break;
+                    case "3":
+                        CapNhatSinhVien(service);
+                        break;
+                    case "4":
+                        XoaSinhVien(service);
+                        break;
+                    case "5":
+                        return;
+                    default:
+                        Console.WriteLine("Tuy chon khong hop le. Nhan bat ky phim nao de tiep tuc.");
+                        Console.ReadKey();
+                        break;
+                }
+            }
+        }
+
+        static void ThemSinhVien(SinhVienService service)
+        {
+            Console.Write("Ho ten: ");
+            var hoTen = Console.ReadLine();
+            Console.Write("Email: ");
+            var email = Console.ReadLine();
+            Console.Write("Ngay sinh (yyyy-mm-dd): ");
+            var ngaySinh = DateTime.Parse(Console.ReadLine());
+            Console.Write("Dia chi: ");
+            var diaChi = Console.ReadLine();
+
+            service.ThemSinhVien(hoTen, email, ngaySinh, diaChi);
+            Console.WriteLine("Sinh vien da duoc them. Nhan bat ky phim nao de tiep tuc.");
+            Console.ReadKey();
+        }
+
+        static void XemSinhVien(SinhVienService service)
+        {
+            var sinhViens = service.LayTatCaSinhVien();
+            foreach (var sinhVien in sinhViens)
+            {
+                Console.WriteLine(sinhVien);
+            }
+            Console.WriteLine("Nhan bat ky phim nao de tiep tuc.");
+            Console.ReadKey();
+        }
+
+        static void CapNhatSinhVien(SinhVienService service)
+        {
+            Console.Write("Ma sinh vien: ");
+            var id = int.Parse(Console.ReadLine());
+            var sinhVien = service.LaySinhVienTheoId(id);
+            if (sinhVien == null)
+            {
+                Console.WriteLine("Sinh vien khong ton tai.");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.Write($"Ho ten ({sinhVien.HoTen}): ");
+            var hoTen = Console.ReadLine();
+            if (string.IsNullOrEmpty(hoTen)) hoTen = sinhVien.HoTen;
+            Console.Write($"Email ({sinhVien.Email}): ");
+            var email = Console.ReadLine();
+            if (string.IsNullOrEmpty(email)) email = sinhVien.Email;
+            Console.Write($"Ngay sinh ({sinhVien.NgaySinh:yyyy-MM-dd}): ");
+            var ngaySinhStr = Console.ReadLine();
+            var ngaySinh = string.IsNullOrEmpty(ngaySinhStr) ? sinhVien.NgaySinh : DateTime.Parse(ngaySinhStr);
+            Console.Write($"Dia chi ({sinhVien.DiaChi}): ");
+            var diaChi = Console.ReadLine();
+            if (string.IsNullOrEmpty(diaChi)) diaChi = sinhVien.DiaChi;
+
+            service.CapNhatSinhVien(id, hoTen, email, ngaySinh, diaChi);
+            Console.WriteLine("Sinh vien da duoc cap nhat. Nhan bat ky phim nao de tiep tuc.");
+            Console.ReadKey();
+        }
+
+        static void XoaSinhVien(SinhVienService service)
+        {
+            Console.Write("Ma sinh vien: ");
+            var id = int.Parse(Console.ReadLine());
+            service.XoaSinhVien(id);
+            Console.WriteLine("Sinh vien da duoc xoa. Nhan bat ky phim nao de tiep tuc.");
+            Console.ReadKey();
+        }
+
+        static void QuanLyMonHoc(MonHocService service)
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Quan Ly Mon Hoc");
+                Console.WriteLine("1. Them Mon Hoc");
+                Console.WriteLine("2. Xem Tat Ca Mon Hoc");
+                Console.WriteLine("3. Cap Nhat Mon Hoc");
+                Console.WriteLine("4. Xoa Mon Hoc");
+                Console.WriteLine("5. Quay Lai");
+                Console.Write("Chon mot tuy chon: ");
+
+                var choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        ThemMonHoc(service);
+                        break;
+                    case "2":
+                        XemMonHoc(service);
+                        break;
+                    case "3":
+                        CapNhatMonHoc(service);
+                        break;
+                    case "4":
+                        XoaMonHoc(service);
+                        break;
+                    case "5":
+                        return;
+                    default:
+                        Console.WriteLine("Tuy chon khong hop le. Nhan bat ky phim nao de tiep tuc.");
+                        Console.ReadKey();
+                        break;
+                }
+            }
+        }
+
+        static void ThemMonHoc(MonHocService service)
+        {
+            Console.Write("Ten mon: ");
+            var tenMon = Console.ReadLine();
+            Console.Write("Mo ta: ");
+            var moTa = Console.ReadLine();
+            Console.Write("So tin chi: ");
+            var soTinChi = int.Parse(Console.ReadLine());
+
+            service.ThemMonHoc(tenMon, moTa, soTinChi);
+            Console.WriteLine("Mon hoc da duoc them. Nhan bat ky phim nao de tiep tuc.");
+            Console.ReadKey();
+        }
+
+        static void XemMonHoc(MonHocService service)
+        {
+            var monHocs = service.LayTatCaMonHoc();
+            foreach (var monHoc in monHocs)
+            {
+                Console.WriteLine(monHoc);
+            }
+            Console.WriteLine("Nhan bat ky phim nao de tiep tuc.");
+            Console.ReadKey();
+        }
+
+        static void CapNhatMonHoc(MonHocService service)
+        {
+            Console.Write("Ma mon hoc: ");
+            var id = int.Parse(Console.ReadLine());
+            var monHoc = service.LayMonHocTheoId(id);
+            if (monHoc == null)
+            {
+                Console.WriteLine("Mon hoc khong ton tai.");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.Write($"Ten mon ({monHoc.TenMon}): ");
+            var tenMon = Console.ReadLine();
+            if (string.IsNullOrEmpty(tenMon)) tenMon = monHoc.TenMon;
+            Console.Write($"Mo ta ({monHoc.MoTa}): ");
+            var moTa = Console.ReadLine();
+            if (string.IsNullOrEmpty(moTa)) moTa = monHoc.MoTa;
+            Console.Write($"So tin chi ({monHoc.SoTinChi}): ");
+            var soTinChiStr = Console.ReadLine();
+            var soTinChi = string.IsNullOrEmpty(soTinChiStr) ? monHoc.SoTinChi : int.Parse(soTinChiStr);
+
+            service.CapNhatMonHoc(id, tenMon, moTa, soTinChi);
+            Console.WriteLine("Mon hoc da duoc cap nhat. Nhan bat ky phim nao de tiep tuc.");
+            Console.ReadKey();
+        }
+
+        static void XoaMonHoc(MonHocService service)
+        {
+            Console.Write("Ma mon hoc: ");
+            var id = int.Parse(Console.ReadLine());
+            service.XoaMonHoc(id);
+            Console.WriteLine("Mon hoc da duoc xoa. Nhan bat ky phim nao de tiep tuc.");
+            Console.ReadKey();
+        }
+
+        static void QuanLyDangKyHoc(DangKyHocService service)
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Quan Ly Dang Ky Hoc");
+                Console.WriteLine("1. Dang Ky Mon Hoc Cho Sinh Vien");
+                Console.WriteLine("2. Xem Tat Ca Dang Ky Hoc");
+                Console.WriteLine("3. Xem Dang Ky Hoc Theo Sinh Vien");
+                Console.WriteLine("4. Huy Dang Ky Hoc");
+                Console.WriteLine("5. Quay Lai");
+                Console.Write("Chon mot tuy chon: ");
+
+                var choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        DangKyMonHoc(service);
+                        break;
+                    case "2":
+                        XemDangKyHoc(service);
+                        break;
+                    case "3":
+                        XemDangKyHocTheoSinhVien(service);
+                        break;
+                    case "4":
+                        HuyDangKyHoc(service);
+                        break;
+                    case "5":
+                        return;
+                    default:
+                        Console.WriteLine("Tuy chon khong hop le. Nhan bat ky phim nao de tiep tuc.");
+                        Console.ReadKey();
+                        break;
+                }
+            }
+        }
+
+        static void DangKyMonHoc(DangKyHocService service)
+        {
+            Console.Write("Ma sinh vien: ");
+            var maSinhVien = int.Parse(Console.ReadLine());
+            Console.Write("Ma mon hoc: ");
+            var maMonHoc = int.Parse(Console.ReadLine());
+
+            try
+            {
+                service.DangKyMonHoc(maSinhVien, maMonHoc);
+                Console.WriteLine("Sinh vien da dang ky mon hoc. Nhan bat ky phim nao de tiep tuc.");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.ReadKey();
+        }
+
+        static void XemDangKyHoc(DangKyHocService service)
+        {
+            var dangKyHocs = service.LayTatCaDangKyHoc();
+            foreach (var dangKyHoc in dangKyHocs)
+            {
+                Console.WriteLine(dangKyHoc);
+            }
+            Console.WriteLine("Nhan bat ky phim nao de tiep tuc.");
+            Console.ReadKey();
+        }
+
+        static void XemDangKyHocTheoSinhVien(DangKyHocService service)
+        {
+            Console.Write("Ma sinh vien: ");
+            var maSinhVien = int.Parse(Console.ReadLine());
+            var dangKyHocs = service.LayDangKyHocTheoSinhVien(maSinhVien);
+            foreach (var dangKyHoc in dangKyHocs)
+            {
+                Console.WriteLine(dangKyHoc);
+            }
+            Console.WriteLine("Nhan bat ky phim nao de tiep tuc.");
+            Console.ReadKey();
+        }
+
+        static void HuyDangKyHoc(DangKyHocService service)
+        {
+            Console.Write("Ma dang ky: ");
+            var id = int.Parse(Console.ReadLine());
+            service.HuyDangKyHoc(id);
+            Console.WriteLine("Da huy dang ky. Nhan bat ky phim nao de tiep tuc.");
+            Console.ReadKey();
         }
     }
 }
