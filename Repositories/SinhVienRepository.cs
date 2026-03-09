@@ -34,6 +34,7 @@ namespace StudentManagementSystem.Repositories
                 existing.Email = sinhVien.Email;
                 existing.NgaySinh = sinhVien.NgaySinh;
                 existing.DiaChi = sinhVien.DiaChi;
+                existing.Lop = sinhVien.Lop;
             }
         }
 

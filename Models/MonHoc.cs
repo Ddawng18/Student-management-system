@@ -17,6 +17,11 @@ namespace StudentManagementSystem.Models
             SoTinChi = soTinChi;
         }
 
+        public void MoMonHoc()
+        {
+            Console.WriteLine($"Mô tả môn học {TenMon}: {MoTa}");
+        }
+
         public override string ToString()
         {
             return $"Mã môn: {MaMonHoc}, Tên môn: {TenMon}, Mô tả: {MoTa}, Số tín chỉ: {SoTinChi}";

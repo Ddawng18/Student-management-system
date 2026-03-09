@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using StudentManagementSystem.Models;
 using StudentManagementSystem.Repositories;
 
@@ -51,6 +52,17 @@ namespace StudentManagementSystem.Services
         public void HuyDangKyHoc(int maDangKy)
         {
             _dangKyHocRepository.XoaDangKy(maDangKy);
+        }
+
+        public void NhapDiem(int maDangKy, float diem)
+        {
+            var dangKyHocs = LayTatCaDangKyHoc();
+            var dangKyHoc = dangKyHocs.FirstOrDefault(d => d.MaDangKy == maDangKy);
+            if (dangKyHoc != null)
+            {
+                dangKyHoc.Diem = diem;
+                dangKyHoc.TinhKetQua();
+            }
         }
     }
 }
