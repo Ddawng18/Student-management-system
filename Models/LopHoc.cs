@@ -2,12 +2,12 @@ using System;
 
 namespace StudentManagementSystem.Models
 {
-    public class LogHoc
+    public class LopHoc
     {
         public int MaLop { get; set; }
         public string TenLop { get; set; }
 
-        public LogHoc(int maLop, string tenLop)
+        public LopHoc(int maLop, string tenLop)
         {
             MaLop = maLop;
             TenLop = tenLop;
