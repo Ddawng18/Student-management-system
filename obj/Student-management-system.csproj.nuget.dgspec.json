@@ -1,26 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/Users/bao/Desktop/c#/Student-management-system/Student-management-system.csproj": {}
+    "C:\\Users\\LENOVO\\Documents\\GitHub\\Student-management-system\\Student-management-system.csproj": {}
   },
   "projects": {
-    "/Users/bao/Desktop/c#/Student-management-system/Student-management-system.csproj": {
+    "C:\\Users\\LENOVO\\Documents\\GitHub\\Student-management-system\\Student-management-system.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/bao/Desktop/c#/Student-management-system/Student-management-system.csproj",
+        "projectUniqueName": "C:\\Users\\LENOVO\\Documents\\GitHub\\Student-management-system\\Student-management-system.csproj",
         "projectName": "Student-management-system",
-        "projectPath": "/Users/bao/Desktop/c#/Student-management-system/Student-management-system.csproj",
-        "packagesPath": "/Users/bao/.nuget/packages/",
-        "outputPath": "/Users/bao/Desktop/c#/Student-management-system/obj/",
+        "projectPath": "C:\\Users\\LENOVO\\Documents\\GitHub\\Student-management-system\\Student-management-system.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LENOVO\\Documents\\GitHub\\Student-management-system\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/bao/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
