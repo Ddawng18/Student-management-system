@@ -1,51 +1,57 @@
-using System;
 using System.Collections.Generic;
 using StudentManagementSystem.Models;
 using StudentManagementSystem.Repositories;
 
 namespace StudentManagementSystem.Services
 {
-    public class SinhVienService
+    public class HocSinhService
     {
+        // Encapsulation: repository được đóng gói trong service
         private readonly ISinhVienRepository _sinhVienRepository;
 
-        public SinhVienService(ISinhVienRepository sinhVienRepository)
+        public HocSinhService(ISinhVienRepository sinhVienRepository)
         {
             _sinhVienRepository = sinhVienRepository;
         }
 
-        public void ThemSinhVien(string hoTen, string email, DateTime ngaySinh, string diaChi, int maKhoa = 0, int maLop = 0)
+        // Thêm học sinh
+        public void ThemHocSinh(SinhVien sinhVien)
         {
-            var sinhVien = new SinhVien(0, hoTen, email, ngaySinh, diaChi, maKhoa, maLop);
             _sinhVienRepository.ThemSinhVien(sinhVien);
         }
 
-        public List<SinhVien> LayTatCaSinhVien()
+        // Lấy tất cả học sinh
+        public List<SinhVien> LayTatCaHocSinh()
         {
             return _sinhVienRepository.LayTatCaSinhVien();
         }
 
-        public SinhVien LaySinhVienTheoId(int id)
+        // Lấy học sinh theo ID
+        public SinhVien LayHocSinhTheoId(int id)
         {
             return _sinhVienRepository.LaySinhVienTheoId(id);
         }
 
-        public void CapNhatSinhVien(int id, string hoTen, string email, DateTime ngaySinh, string diaChi, int maKhoa = 0, int maLop = 0)
+        // Cập nhật học sinh
+        public void CapNhatHocSinh(SinhVien sinhVien)
         {
-            var sinhVien = new SinhVien(id, hoTen, email, ngaySinh, diaChi, maKhoa, maLop);
             _sinhVienRepository.CapNhatSinhVien(sinhVien);
         }
 
-        public void XoaSinhVien(int id)
+        // Xóa học sinh
+        public void XoaHocSinh(int id)
         {
             _sinhVienRepository.XoaSinhVien(id);
         }
-        public List<SinhVien> TimSinhVienTheoTen(string ten)
+
+        // Tìm học sinh theo tên
+        public List<SinhVien> TimHocSinhTheoTen(string ten)
         {
             return _sinhVienRepository.TimSinhVienTheoTen(ten);
         }
 
-        public List<SinhVien> TimSinhVienTheoLop(int maLop)
+        // Tìm học sinh theo lớp
+        public List<SinhVien> TimHocSinhTheoLop(int maLop)
         {
             return _sinhVienRepository.TimSinhVienTheoLop(maLop);
         }
