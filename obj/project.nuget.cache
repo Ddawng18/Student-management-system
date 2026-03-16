@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bdBynjGlAlE=",
+  "dgSpecHash": "n63OeTsoP0Q=",
   "success": true,
-  "projectFilePath": "/Users/bao/Student-management-system/Student-management-system.csproj",
-  "expectedPackageFiles": [
-    "/Users/bao/.nuget/packages/microsoft.netcore.app.ref/9.0.14/microsoft.netcore.app.ref.9.0.14.nupkg.sha512",
-    "/Users/bao/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.14/microsoft.aspnetcore.app.ref.9.0.14.nupkg.sha512",
-    "/Users/bao/.nuget/packages/microsoft.netcore.app.host.osx-arm64/9.0.14/microsoft.netcore.app.host.osx-arm64.9.0.14.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\LENOVO\\Documents\\GitHub\\Student-management-system\\Student-management-system.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
