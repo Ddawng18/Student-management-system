@@ -2,21 +2,18 @@ using System;
 
 namespace StudentManagementSystem.Models
 {
-    public class SinhVien
+    public class SinhVien : Nguoi
     {
         public int MaSinhVien { get; set; }
-        public string HoTen { get; set; }
-        public string Email { get; set; }
         public DateTime NgaySinh { get; set; }
         public string DiaChi { get; set; }
         public int MaKhoa { get; set; }
         public int MaLop { get; set; }
 
         public SinhVien(int maSinhVien, string hoTen, string email, DateTime ngaySinh, string diaChi, int maKhoa = 0, int maLop = 0)
+            : base(maSinhVien, hoTen, email)
         {
             MaSinhVien = maSinhVien;
-            HoTen = hoTen;
-            Email = email;
             NgaySinh = ngaySinh;
             DiaChi = diaChi;
             MaKhoa = maKhoa;
