@@ -47,5 +47,33 @@ namespace StudentManagementSystem.Repositories
                 _sinhViens.Remove(sinhVien);
             }
         }
+        public List<SinhVien> TimSinhVienTheoTen(string ten)
+        {
+    List<SinhVien> ketQua = new List<SinhVien>();
+
+    foreach (SinhVien sv in danhSachSinhVien)
+    {
+        if (sv.HoTen.Contains(ten))
+        {
+            ketQua.Add(sv);
+        }
+    }
+
+    return ketQua;
+        }
+        public List<SinhVien> TimSinhVienTheoLop(int maLop)
+{
+    List<SinhVien> ketQua = new List<SinhVien>();
+
+    foreach (SinhVien sv in danhSachSinhVien)
+    {
+        if (sv.MaLop == maLop)
+        {
+            ketQua.Add(sv);
+        }
+    }
+
+    return ketQua;
+}
     }
 }
