@@ -121,4 +121,30 @@ namespace StudentManagementSystem.Models
             return $"{TenKhoa} (CNTT) tập trung đào tạo lập trình và hệ thống thông tin.";
         }
     }
+
+    public class KhoaHeThongThongTinKinhDoanh : Khoa
+    {
+        public KhoaHeThongThongTinKinhDoanh(string maKhoa, string tenKhoa)
+            : base(maKhoa, tenKhoa)
+        {
+        }
+
+        public override string LayMoTaKhoa()
+        {
+            return $"{TenKhoa} (HTTTKD) tập trung vào phân tích dữ liệu và hệ thống kinh doanh.";
+        }
+    }
+
+    public class KhoaKeToan : Khoa
+    {
+        public KhoaKeToan(string maKhoa, string tenKhoa)
+            : base(maKhoa, tenKhoa)
+        {
+        }
+
+        public override string LayMoTaKhoa()
+        {
+            return $"{TenKhoa} (Kế toán) chuyên đào tạo về tài chính, kế toán và kiểm toán.";
+        }
+    }
 }
