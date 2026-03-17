@@ -10,6 +10,7 @@ namespace StudentManagementSystem.Models
 
         public string MaSinhVien { get; private set; }
         public DateTime NgaySinh { get; private set; }
+        public LopHoc LopHoc { get; private set; } //cho phép đọc từ bên ngoài //private set → chỉ class này được phép gán
         public IReadOnlyList<DangKyHoc> DanhSachDangKy
         {
             get { return _danhSachDangKy.AsReadOnly(); }
@@ -26,6 +27,10 @@ namespace StudentManagementSystem.Models
             MaSinhVien = maSinhVien;
             NgaySinh = ngaySinh;
             _danhSachDangKy = new List<DangKyHoc>();
+        }
+        internal void GanVaoLop(LopHoc lop)
+        {
+            LopHoc = lop;
         }
 
         public void DangKyMonHoc(MonHoc monHoc, HocKy hocKy)
