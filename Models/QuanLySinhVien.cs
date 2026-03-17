@@ -53,6 +53,12 @@ namespace StudentManagementSystem.Models
             {
                 if (_danhSachSinhVien[index].MaSinhVien == maSinhVien)
                 {
+                    SinhVien sinhVien = _danhSachSinhVien[index];
+                    // Composition: Khi xóa SinhVien, xóa các DangKyHoc liên quan
+                    foreach (var dangKyHoc in sinhVien.DanhSachDangKy)
+                    {
+                        dangKyHoc.MonHoc.XoaDangKy(dangKyHoc);
+                    }
                     _danhSachSinhVien.RemoveAt(index);
                     return;
                 }

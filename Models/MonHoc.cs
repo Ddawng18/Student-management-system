@@ -85,5 +85,15 @@ namespace StudentManagementSystem.Models
                 _danhSachDangKy.Add(dangKyHoc);
             }
         }
+
+        public void XoaDangKy(DangKyHoc dangKyHoc)
+        {
+            if (dangKyHoc == null)
+            {
+                throw new ArgumentNullException(nameof(dangKyHoc));
+            }
+
+            _danhSachDangKy.Remove(dangKyHoc);
+        }
     }
 }
