@@ -3,13 +3,15 @@ using System.Collections.Generic;
 
 namespace StudentManagementSystem.Models
 {
-    // Encapsulation + Polymorphism: đóng gói dữ liệu và cho phép lớp con thay đổi cách mô tả khoa.
+    // Polymorphism
     public class Khoa
     {
         private readonly List<LopHoc> _danhSachLopHoc;
+        private const string MaTruongKhoaMacDinh = "GV_MAC_DINH";
 
         public string MaKhoa { get; private set; }
         public string TenKhoa { get; private set; }
+        public GiangVien TruongKhoa { get; private set; }
 
         public IReadOnlyList<LopHoc> DanhSachLopHoc
         {
@@ -31,6 +33,7 @@ namespace StudentManagementSystem.Models
             MaKhoa = maKhoa;
             TenKhoa = tenKhoa;
             _danhSachLopHoc = new List<LopHoc>();
+            TruongKhoa = new GiangVien(MaTruongKhoaMacDinh, "Chưa phân công", "chuaphancong@khoa.local");
         }
 
         public void DoiTenKhoa(string tenKhoaMoi)
@@ -66,9 +69,37 @@ namespace StudentManagementSystem.Models
             _danhSachLopHoc.Remove(lopHoc);
         }
 
+        // Association: Khoa liên kết với GiangVien qua vai trò Trưởng khoa.
+        // Hai đối tượng vẫn tồn tại độc lập, không phụ thuộc lẫn nhau.
+        public void GanTruongKhoa(GiangVien giangVien)
+        {
+            if (giangVien == null)
+            {
+                throw new ArgumentNullException(nameof(giangVien));
+            }
+
+            TruongKhoa = giangVien;
+        }
+
+        public void HuyTruongKhoa()
+        {
+            TruongKhoa = new GiangVien(MaTruongKhoaMacDinh, "Chưa phân công", "chuaphancong@khoa.local");
+        }
+
         public virtual string LayMoTaKhoa()
         {
-            return $"Khoa {TenKhoa} có {_danhSachLopHoc.Count} lớp học.";
+            string thongTinTruongKhoa;
+
+            if (TruongKhoa.MaGiangVien == MaTruongKhoaMacDinh)
+            {
+                thongTinTruongKhoa = "Chưa phân công trưởng khoa";
+            }
+            else
+            {
+                thongTinTruongKhoa = $"Trưởng khoa: {TruongKhoa.HoTen}";
+            }
+
+            return $"Khoa {TenKhoa} có {_danhSachLopHoc.Count} lớp học. {thongTinTruongKhoa}.";
         }
 
         public override string ToString()
