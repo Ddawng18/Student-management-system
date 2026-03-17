@@ -41,6 +41,8 @@ namespace StudentManagementSystem.Models
             if (!_danhSachSinhVien.Contains(sinhVien))
             {
                 _danhSachSinhVien.Add(sinhVien);
+
+                sinhVien.GanVaoLop(this); //Sinh viên này thuộc về lớp hiện tại (Aggregation)
             }
         }
 
@@ -51,7 +53,12 @@ namespace StudentManagementSystem.Models
                 throw new ArgumentNullException(nameof(sinhVien));
             }
 
-            _danhSachSinhVien.Remove(sinhVien);
+            if (_danhSachSinhVien.Remove(sinhVien))
+            {
+                
+                sinhVien.GanVaoLop(null); //Sinh viên này thuộc về lớp hiện tại (Aggregation)
+                                          //sinh viên không còn thuộc lớp nào nữa
+            }
         }
 
         public override string ToString()
