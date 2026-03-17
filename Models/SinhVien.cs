@@ -7,7 +7,6 @@ namespace StudentManagementSystem.Models
     public class SinhVien : Nguoi
     {
         private readonly List<DangKyHoc> _danhSachDangKy;
-        private readonly BangDiem _bangDiem; // Composition: BangDiem thuộc về SinhVien
 
         public string MaSinhVien { get; private set; }
         public DateTime NgaySinh { get; private set; }
@@ -16,7 +15,6 @@ namespace StudentManagementSystem.Models
         {
             get { return _danhSachDangKy.AsReadOnly(); }
         }
-        public BangDiem BangDiem => _bangDiem; // Cho phép truy cập BangDiem để xem điểm
 
         public SinhVien(string maSinhVien, string hoTen, string email, DateTime ngaySinh)
             : base(maSinhVien, hoTen, email)
@@ -29,7 +27,6 @@ namespace StudentManagementSystem.Models
             MaSinhVien = maSinhVien;
             NgaySinh = ngaySinh;
             _danhSachDangKy = new List<DangKyHoc>();
-            _bangDiem = new BangDiem(); // Khởi tạo BangDiem trong composition
         }
         internal void GanVaoLop(LopHoc lop)
         {
@@ -50,11 +47,6 @@ namespace StudentManagementSystem.Models
 
             DangKyHoc dangKyHoc = new DangKyHoc(this, monHoc, hocKy);
             _danhSachDangKy.Add(dangKyHoc);
-        }
-
-        public void CapNhatDiem(string maMonHoc, double diem)
-        {
-            _bangDiem.ThemDiem(maMonHoc, diem);
         }
 
         public string XemKetQuaHocTap()
@@ -78,9 +70,5 @@ namespace StudentManagementSystem.Models
             return "SinhVien";
         }
 
-        public override string HienThiThongTin()
-        {
-            return $"SinhVien - {base.HienThiThongTin()}, Ngày sinh: {NgaySinh:dd/MM/yyyy}, Điểm trung bình: {BangDiem.TinhDiemTrungBinh():F2}";
-        }
     }
 }
