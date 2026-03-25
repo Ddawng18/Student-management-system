@@ -6,6 +6,13 @@
     <RootNamespace>Student_management_system</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Models/**/*.cs" />
+    <Compile Include="Services/**/*.cs" />
+  </ItemGroup>
 
 </Project>

@@ -26,9 +26,19 @@ namespace StudentManagementSystem.Models
                 throw new ArgumentException("Tên lớp không được để trống.", nameof(tenLop));
             }
 
-            MaLop = maLop;
-            TenLop = tenLop;
+            MaLop = maLop.Trim();
+            TenLop = tenLop.Trim();
             _danhSachSinhVien = new List<SinhVien>();
+        }
+
+        public void DoiTenLop(string tenLopMoi)
+        {
+            if (string.IsNullOrWhiteSpace(tenLopMoi))
+            {
+                throw new ArgumentException("Tên lớp mới không được để trống.", nameof(tenLopMoi));
+            }
+
+            TenLop = tenLopMoi.Trim();
         }
 
         public void ThemSinhVien(SinhVien sinhVien)
@@ -38,11 +48,24 @@ namespace StudentManagementSystem.Models
                 throw new ArgumentNullException(nameof(sinhVien));
             }
 
-            if (!_danhSachSinhVien.Contains(sinhVien))
+            bool daTonTai = false;
+            int index = 0;
+
+            while (index < _danhSachSinhVien.Count)
+            {
+                if (ReferenceEquals(_danhSachSinhVien[index], sinhVien))
+                {
+                    daTonTai = true;
+                    break;
+                }
+
+                index = index + 1;
+            }
+
+            if (!daTonTai)
             {
                 _danhSachSinhVien.Add(sinhVien);
-
-                sinhVien.GanVaoLop(this); //Sinh viên này thuộc về lớp hiện tại (Aggregation)
+                sinhVien.GanVaoLop(this);
             }
         }
 
@@ -53,11 +76,11 @@ namespace StudentManagementSystem.Models
                 throw new ArgumentNullException(nameof(sinhVien));
             }
 
-            if (_danhSachSinhVien.Remove(sinhVien))
+            bool daXoa = _danhSachSinhVien.Remove(sinhVien);
+
+            if (daXoa)
             {
-                
-                sinhVien.GanVaoLop(null); //Sinh viên này thuộc về lớp hiện tại (Aggregation)
-                                          //sinh viên không còn thuộc lớp nào nữa
+                sinhVien.GanVaoLop(null);
             }
         }
 

@@ -80,7 +80,21 @@ namespace StudentManagementSystem.Models
                 throw new ArgumentNullException(nameof(dangKyHoc));
             }
 
-            if (!_danhSachDangKy.Contains(dangKyHoc))
+            bool daTonTai = false;
+            int index = 0;
+
+            while (index < _danhSachDangKy.Count)
+            {
+                if (ReferenceEquals(_danhSachDangKy[index], dangKyHoc))
+                {
+                    daTonTai = true;
+                    break;
+                }
+
+                index = index + 1;
+            }
+
+            if (!daTonTai)
             {
                 _danhSachDangKy.Add(dangKyHoc);
             }
@@ -94,6 +108,11 @@ namespace StudentManagementSystem.Models
             }
 
             _danhSachDangKy.Remove(dangKyHoc);
+        }
+
+        public override string ToString()
+        {
+            return "Môn học " + _maMonHoc + " - " + _tenMon + " (" + _soTinChi + " tín chỉ)";
         }
     }
 }

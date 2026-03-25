@@ -37,6 +37,12 @@ namespace StudentManagementSystem.Models
 
             _maHocKy = maHocKy;
             _tenHocKy = tenHocKy;
+
+            if (namHoc <= 0)
+            {
+                throw new ArgumentException("Năm học phải lớn hơn 0.", nameof(namHoc));
+            }
+
             _namHoc = namHoc;
         }
 
@@ -58,6 +64,11 @@ namespace StudentManagementSystem.Models
             }
 
             _namHoc = namHocMoi;
+        }
+
+        public override string ToString()
+        {
+            return _maHocKy + " - " + _tenHocKy + " (Năm học " + _namHoc + ")";
         }
     }
 }

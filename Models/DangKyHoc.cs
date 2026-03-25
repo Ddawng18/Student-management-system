@@ -2,24 +2,50 @@ using System;
 
 namespace StudentManagementSystem.Models
 {
-    // Polymorphism: method TinhKetQua là virtual, có thể override theo quy tắc từng hệ đào tạo.
     public class DangKyHoc
     {
-        public SinhVien SinhVien { get; private set; }
-        public MonHoc MonHoc { get; private set; }
-        public HocKy HocKy { get; private set; }
-        public float Diem { get; private set; }
-        public string KetQua { get; protected set; }
+        private SinhVien _sinhVien;
+        private MonHoc _monHoc;
+        private HocKy _hocKy;
+        private float _diem;
+        private string _ketQua;
+
+        public SinhVien SinhVien
+        {
+            get { return _sinhVien; }
+        }
+
+        public MonHoc MonHoc
+        {
+            get { return _monHoc; }
+        }
+
+        public HocKy HocKy
+        {
+            get { return _hocKy; }
+        }
+
+        public float Diem
+        {
+            get { return _diem; }
+        }
+
+        public string KetQua
+        {
+            get { return _ketQua; }
+            protected set { _ketQua = value; }
+        }
 
         public DangKyHoc(SinhVien sinhVien, MonHoc monHoc, HocKy hocKy)
         {
-            SinhVien = sinhVien ?? throw new ArgumentNullException(nameof(sinhVien));
-            MonHoc = monHoc ?? throw new ArgumentNullException(nameof(monHoc));
-            HocKy = hocKy ?? throw new ArgumentNullException(nameof(hocKy));
-            Diem = -1;
-            KetQua = "Chưa có điểm";
+            _sinhVien = sinhVien ?? throw new ArgumentNullException(nameof(sinhVien));
+            _monHoc = monHoc ?? throw new ArgumentNullException(nameof(monHoc));
+            _hocKy = hocKy ?? throw new ArgumentNullException(nameof(hocKy));
+            _diem = -1f;
+            _ketQua = "Chưa có điểm";
 
-            MonHoc.ThemDangKy(this);
+            _monHoc.ThemDangKy(this);
+            _sinhVien.ThemDangKy(this);
         }
 
         public void NhapDiem(float diem)
@@ -29,11 +55,41 @@ namespace StudentManagementSystem.Models
                 throw new ArgumentException("Điểm phải trong khoảng 0 đến 10.", nameof(diem));
             }
 
-            Diem = diem;
+            _diem = diem;
             TinhKetQua();
         }
 
         public virtual void TinhKetQua()
+        {
+            if (_diem < 0)
+            {
+                _ketQua = "Chưa có điểm";
+                return;
+            }
+
+            if (_diem >= 5f)
+            {
+                _ketQua = "Đạt";
+                return;
+            }
+
+            _ketQua = "Rớt";
+        }
+
+        public virtual string LayThongTinDangKy()
+        {
+            return _sinhVien.MaSinhVien + " - " + _monHoc.MaMonHoc + " - " + _hocKy.MaHocKy + " => " + _ketQua;
+        }
+    }
+
+    public sealed class DangKyHocHeChatLuongCao : DangKyHoc
+    {
+        public DangKyHocHeChatLuongCao(SinhVien sinhVien, MonHoc monHoc, HocKy hocKy)
+            : base(sinhVien, monHoc, hocKy)
+        {
+        }
+
+        public override void TinhKetQua()
         {
             if (Diem < 0)
             {
@@ -41,7 +97,18 @@ namespace StudentManagementSystem.Models
                 return;
             }
 
-            KetQua = Diem >= 5 ? "Đạt" : "Rớt";
+            if (Diem >= 6.5f)
+            {
+                KetQua = "Đạt (CLC)";
+                return;
+            }
+
+            KetQua = "Rớt (CLC)";
+        }
+
+        public override string LayThongTinDangKy()
+        {
+            return "[CLC] " + base.LayThongTinDangKy();
         }
     }
 }

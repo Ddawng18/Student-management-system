@@ -1,67 +1,41 @@
 using System;
 using System.Collections.Generic;
+using StudentManagementSystem.Services;
 
 namespace StudentManagementSystem.Models
 {
     public class QuanLyMonHoc
     {
-        private readonly List<MonHoc> _danhSachMonHoc;
+        private readonly MonHocService _monHocService;
 
         public QuanLyMonHoc()
         {
-            _danhSachMonHoc = new List<MonHoc>();
+            _monHocService = new MonHocService();
         }
 
         public void ThemMonHoc(MonHoc monHoc)
         {
-            if (monHoc == null)
-            {
-                throw new ArgumentNullException(nameof(monHoc));
-            }
-
-            if (!_danhSachMonHoc.Contains(monHoc))
-            {
-                _danhSachMonHoc.Add(monHoc);
-            }
+            _monHocService.Them(monHoc);
         }
 
         public void CapNhatMonHoc(MonHoc monHoc)
         {
-            if (monHoc == null)
-            {
-                throw new ArgumentNullException(nameof(monHoc));
-            }
-
-            for (int index = 0; index < _danhSachMonHoc.Count; index++)
-            {
-                if (_danhSachMonHoc[index].MaMonHoc == monHoc.MaMonHoc)
-                {
-                    _danhSachMonHoc[index] = monHoc;
-                    return;
-                }
-            }
+            _monHocService.CapNhat(monHoc);
         }
 
         public void XoaMonHoc(string maMonHoc)
         {
-            if (string.IsNullOrWhiteSpace(maMonHoc))
-            {
-                throw new ArgumentException("Mã môn học không được để trống.", nameof(maMonHoc));
-            }
-
-            for (int index = 0; index < _danhSachMonHoc.Count; index++)
-            {
-                if (_danhSachMonHoc[index].MaMonHoc == maMonHoc)
-                {
-                    _danhSachMonHoc.RemoveAt(index);
-                    return;
-                }
-            }
+            _monHocService.XoaTheoMa(maMonHoc);
         }
 
         public IReadOnlyList<MonHoc> LayDanhSachMonHoc()
         {
-            return _danhSachMonHoc.AsReadOnly();
+            return _monHocService.LayTatCa();
+        }
+
+        public MonHoc? TimMonHocTheoMa(string maMonHoc)
+        {
+            return _monHocService.TimTheoMa(maMonHoc);
         }
     }
 }

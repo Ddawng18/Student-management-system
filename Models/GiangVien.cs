@@ -4,12 +4,28 @@ namespace StudentManagementSystem.Models
 {
     public class GiangVien : Nguoi
     {
-        public string MaGiangVien { get; private set; }
+        private string _maGiangVien;
+
+        public string MaGiangVien
+        {
+            get { return _maGiangVien; }
+        }
 
         public GiangVien(string maGiangVien, string hoTen, string email)
             : base(maGiangVien, hoTen, email)
         {
-            MaGiangVien = maGiangVien;
+            if (string.IsNullOrWhiteSpace(maGiangVien))
+            {
+                throw new ArgumentException("Mã giảng viên không được để trống.", nameof(maGiangVien));
+            }
+
+            _maGiangVien = maGiangVien.Trim();
+        }
+
+        public void CapNhatThongTinCoBan(string hoTenMoi, string emailMoi)
+        {
+            CapNhatHoTen(hoTenMoi);
+            CapNhatEmail(emailMoi);
         }
 
         public void NhapDiem(DangKyHoc dangKyHoc, float diem)
@@ -22,9 +38,14 @@ namespace StudentManagementSystem.Models
             dangKyHoc.NhapDiem(diem);
         }
 
-        public string QuanLyMon()
+        public string QuanLyMon(MonHoc monHoc)
         {
-            return $"Giảng viên {HoTen} đang quản lý môn học.";
+            if (monHoc == null)
+            {
+                throw new ArgumentNullException(nameof(monHoc));
+            }
+
+            return "Giảng viên " + HoTen + " đang phụ trách môn " + monHoc.TenMon + ".";
         }
 
         public override string LayVaiTro()
@@ -34,7 +55,7 @@ namespace StudentManagementSystem.Models
 
         public override string HienThiThongTin()
         {
-            return $"GiangVien - {base.HienThiThongTin()}";
+            return "GiangVien - " + base.HienThiThongTin() + ", Mã GV: " + _maGiangVien;
         }
     }
 }

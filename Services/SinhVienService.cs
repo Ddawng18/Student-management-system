@@ -1,58 +1,98 @@
+using System;
 using System.Collections.Generic;
 using StudentManagementSystem.Models;
-using StudentManagementSystem.Repositories;
 
 namespace StudentManagementSystem.Services
 {
-    public class SinhVienService
+    public class SinhVienService : DichVuQuanLyCoSo<SinhVien>
     {
-        private readonly ISinhVienRepository _sinhVienRepository;
-
-        public SinhVienService(ISinhVienRepository sinhVienRepository)
+        protected override string LayKhoa(SinhVien doiTuong)
         {
-            _sinhVienRepository = sinhVienRepository;
+            return doiTuong.MaSinhVien;
         }
 
-        // Thêm sinh viên
-        public void ThemSinhVien(SinhVien sinhVien)
+        public IReadOnlyList<SinhVien> TimTheoTen(string ten)
         {
-            _sinhVienRepository.ThemSinhVien(sinhVien);
+            if (string.IsNullOrWhiteSpace(ten))
+            {
+                return new List<SinhVien>().AsReadOnly();
+            }
+
+            string tenCanTim = ten.Trim().ToLowerInvariant();
+            List<SinhVien> ketQua = new List<SinhVien>();
+            int index = 0;
+
+            while (index < DuLieuNoiBo.Count)
+            {
+                SinhVien sinhVien = DuLieuNoiBo[index];
+
+                if (sinhVien.HoTen.ToLowerInvariant().Contains(tenCanTim))
+                {
+                    ketQua.Add(sinhVien);
+                }
+
+                index = index + 1;
+            }
+
+            return ketQua.AsReadOnly();
         }
 
-        // Lấy tất cả sinh viên
-        public List<SinhVien> LayTatCaSinhVien()
+        public IReadOnlyList<SinhVien> TimTheoLop(string maLop)
         {
-            return _sinhVienRepository.LayTatCaSinhVien();
+            if (string.IsNullOrWhiteSpace(maLop))
+            {
+                return new List<SinhVien>().AsReadOnly();
+            }
+
+            string maLopCanTim = maLop.Trim();
+            List<SinhVien> ketQua = new List<SinhVien>();
+            int index = 0;
+
+            while (index < DuLieuNoiBo.Count)
+            {
+                SinhVien sinhVien = DuLieuNoiBo[index];
+                LopHoc? lopHoc = sinhVien.LopHoc;
+
+                if (lopHoc != null && string.Equals(lopHoc.MaLop, maLopCanTim, StringComparison.OrdinalIgnoreCase))
+                {
+                    ketQua.Add(sinhVien);
+                }
+
+                index = index + 1;
+            }
+
+            return ketQua.AsReadOnly();
         }
 
-        // Lấy sinh viên theo ID
-        public SinhVien LaySinhVienTheoId(int id)
+        public override void XoaTheoMa(string ma)
         {
-            return _sinhVienRepository.LaySinhVienTheoId(id);
-        }
+            SinhVien? sinhVien = TimTheoMa(ma);
 
-        // Cập nhật sinh viên
-        public void CapNhatSinhVien(SinhVien sinhVien)
-        {
-            _sinhVienRepository.CapNhatSinhVien(sinhVien);
-        }
+            if (sinhVien == null)
+            {
+                return;
+            }
 
-        // Xóa sinh viên
-        public void XoaSinhVien(int id)
-        {
-            _sinhVienRepository.XoaSinhVien(id);
-        }
+            IReadOnlyList<DangKyHoc> danhSachDangKy = sinhVien.DanhSachDangKy;
+            List<DangKyHoc> banSaoDangKy = new List<DangKyHoc>();
+            int indexBanSao = 0;
 
-        // Tìm sinh viên theo tên
-        public List<SinhVien> TimSinhVienTheoTen(string ten)
-        {
-            return _sinhVienRepository.TimSinhVienTheoTen(ten);
-        }
+            while (indexBanSao < danhSachDangKy.Count)
+            {
+                banSaoDangKy.Add(danhSachDangKy[indexBanSao]);
+                indexBanSao = indexBanSao + 1;
+            }
 
-        // Tìm sinh viên theo lớp
-        public List<SinhVien> TimSinhVienTheoLop(int maLop)
-        {
-            return _sinhVienRepository.TimSinhVienTheoLop(maLop);
+            int index = 0;
+            while (index < banSaoDangKy.Count)
+            {
+                DangKyHoc dangKyHoc = banSaoDangKy[index];
+                dangKyHoc.MonHoc.XoaDangKy(dangKyHoc);
+                sinhVien.XoaDangKy(dangKyHoc);
+                index = index + 1;
+            }
+
+            base.XoaTheoMa(ma);
         }
     }
 }
