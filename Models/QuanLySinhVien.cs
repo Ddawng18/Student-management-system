@@ -1,73 +1,41 @@
 using System;
 using System.Collections.Generic;
+using StudentManagementSystem.Services;
 
 namespace StudentManagementSystem.Models
 {
     public class QuanLySinhVien
     {
-        private readonly List<SinhVien> _danhSachSinhVien;
+        private readonly SinhVienService _sinhVienService;
 
         public QuanLySinhVien()
         {
-            _danhSachSinhVien = new List<SinhVien>();
+            _sinhVienService = new SinhVienService();
         }
 
         public void ThemSinhVien(SinhVien sinhVien)
         {
-            if (sinhVien == null)
-            {
-                throw new ArgumentNullException(nameof(sinhVien));
-            }
-
-            if (!_danhSachSinhVien.Contains(sinhVien))
-            {
-                _danhSachSinhVien.Add(sinhVien);
-            }
+            _sinhVienService.Them(sinhVien);
         }
 
         public void CapNhatSinhVien(SinhVien sinhVien)
         {
-            if (sinhVien == null)
-            {
-                throw new ArgumentNullException(nameof(sinhVien));
-            }
-
-            for (int index = 0; index < _danhSachSinhVien.Count; index++)
-            {
-                if (_danhSachSinhVien[index].MaSinhVien == sinhVien.MaSinhVien)
-                {
-                    _danhSachSinhVien[index] = sinhVien;
-                    return;
-                }
-            }
+            _sinhVienService.CapNhat(sinhVien);
         }
 
         public void XoaSinhVien(string maSinhVien)
         {
-            if (string.IsNullOrWhiteSpace(maSinhVien))
-            {
-                throw new ArgumentException("Mã sinh viên không được để trống.", nameof(maSinhVien));
-            }
-
-            for (int index = 0; index < _danhSachSinhVien.Count; index++)
-            {
-                if (_danhSachSinhVien[index].MaSinhVien == maSinhVien)
-                {
-                    SinhVien sinhVien = _danhSachSinhVien[index];
-                    // Composition: Khi xóa SinhVien, xóa các DangKyHoc liên quan
-                    foreach (var dangKyHoc in sinhVien.DanhSachDangKy)
-                    {
-                        dangKyHoc.MonHoc.XoaDangKy(dangKyHoc);
-                    }
-                    _danhSachSinhVien.RemoveAt(index);
-                    return;
-                }
-            }
+            _sinhVienService.XoaTheoMa(maSinhVien);
         }
 
         public IReadOnlyList<SinhVien> LayDanhSachSinhVien()
         {
-            return _danhSachSinhVien.AsReadOnly();
+            return _sinhVienService.LayTatCa();
+        }
+
+        public IReadOnlyList<SinhVien> TimSinhVienTheoLop(string maLop)
+        {
+            return _sinhVienService.TimTheoLop(maLop);
         }
     }
 }

@@ -3,15 +3,28 @@ using System.Collections.Generic;
 
 namespace StudentManagementSystem.Models
 {
-    // Polymorphism
     public class Khoa
     {
         private readonly List<LopHoc> _danhSachLopHoc;
         private const string MaTruongKhoaMacDinh = "GV_MAC_DINH";
+        private string _maKhoa;
+        private string _tenKhoa;
+        private GiangVien _truongKhoa;
 
-        public string MaKhoa { get; private set; }
-        public string TenKhoa { get; private set; }
-        public GiangVien TruongKhoa { get; private set; }
+        public string MaKhoa
+        {
+            get { return _maKhoa; }
+        }
+
+        public string TenKhoa
+        {
+            get { return _tenKhoa; }
+        }
+
+        public GiangVien TruongKhoa
+        {
+            get { return _truongKhoa; }
+        }
 
         public IReadOnlyList<LopHoc> DanhSachLopHoc
         {
@@ -30,10 +43,10 @@ namespace StudentManagementSystem.Models
                 throw new ArgumentException("Tên khoa không được để trống.", nameof(tenKhoa));
             }
 
-            MaKhoa = maKhoa;
-            TenKhoa = tenKhoa;
+            _maKhoa = maKhoa.Trim();
+            _tenKhoa = tenKhoa.Trim();
             _danhSachLopHoc = new List<LopHoc>();
-            TruongKhoa = new GiangVien(MaTruongKhoaMacDinh, "Chưa phân công", "chuaphancong@khoa.local");
+            _truongKhoa = new GiangVien(MaTruongKhoaMacDinh, "Chưa phân công", "chuaphancong@khoa.local");
         }
 
         public void DoiTenKhoa(string tenKhoaMoi)
@@ -43,7 +56,7 @@ namespace StudentManagementSystem.Models
                 throw new ArgumentException("Tên khoa mới không được để trống.", nameof(tenKhoaMoi));
             }
 
-            TenKhoa = tenKhoaMoi;
+            _tenKhoa = tenKhoaMoi.Trim();
         }
 
         public void ThemLopHoc(LopHoc lopHoc)
@@ -53,7 +66,21 @@ namespace StudentManagementSystem.Models
                 throw new ArgumentNullException(nameof(lopHoc));
             }
 
-            if (!_danhSachLopHoc.Contains(lopHoc))
+            bool daTonTai = false;
+            int index = 0;
+
+            while (index < _danhSachLopHoc.Count)
+            {
+                if (ReferenceEquals(_danhSachLopHoc[index], lopHoc))
+                {
+                    daTonTai = true;
+                    break;
+                }
+
+                index = index + 1;
+            }
+
+            if (!daTonTai)
             {
                 _danhSachLopHoc.Add(lopHoc);
             }
@@ -69,8 +96,6 @@ namespace StudentManagementSystem.Models
             _danhSachLopHoc.Remove(lopHoc);
         }
 
-        // Association: Khoa liên kết với GiangVien qua vai trò Trưởng khoa.
-        // Hai đối tượng vẫn tồn tại độc lập, không phụ thuộc lẫn nhau.
         public void GanTruongKhoa(GiangVien giangVien)
         {
             if (giangVien == null)
@@ -78,28 +103,28 @@ namespace StudentManagementSystem.Models
                 throw new ArgumentNullException(nameof(giangVien));
             }
 
-            TruongKhoa = giangVien;
+            _truongKhoa = giangVien;
         }
 
         public void HuyTruongKhoa()
         {
-            TruongKhoa = new GiangVien(MaTruongKhoaMacDinh, "Chưa phân công", "chuaphancong@khoa.local");
+            _truongKhoa = new GiangVien(MaTruongKhoaMacDinh, "Chưa phân công", "chuaphancong@khoa.local");
         }
 
         public virtual string LayMoTaKhoa()
         {
             string thongTinTruongKhoa;
 
-            if (TruongKhoa.MaGiangVien == MaTruongKhoaMacDinh)
+            if (_truongKhoa.MaGiangVien == MaTruongKhoaMacDinh)
             {
                 thongTinTruongKhoa = "Chưa phân công trưởng khoa";
             }
             else
             {
-                thongTinTruongKhoa = $"Trưởng khoa: {TruongKhoa.HoTen}";
+                thongTinTruongKhoa = "Trưởng khoa: " + _truongKhoa.HoTen;
             }
 
-            return $"Khoa {TenKhoa} có {_danhSachLopHoc.Count} lớp học. {thongTinTruongKhoa}.";
+            return "Khoa " + _tenKhoa + " có " + _danhSachLopHoc.Count + " lớp học. " + thongTinTruongKhoa + ".";
         }
 
         public override string ToString()
@@ -108,7 +133,6 @@ namespace StudentManagementSystem.Models
         }
     }
 
-    // Polymorphism: override hành vi mô tả từ lớp cha Khoa.
     public class KhoaCongNgheThongTin : Khoa
     {
         public KhoaCongNgheThongTin(string maKhoa, string tenKhoa)
@@ -118,7 +142,7 @@ namespace StudentManagementSystem.Models
 
         public override string LayMoTaKhoa()
         {
-            return $"{TenKhoa} (CNTT) tập trung đào tạo lập trình và hệ thống thông tin.";
+            return TenKhoa + " (CNTT) tập trung đào tạo lập trình và hệ thống thông tin.";
         }
     }
 

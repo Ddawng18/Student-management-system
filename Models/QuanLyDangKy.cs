@@ -1,63 +1,41 @@
 using System;
 using System.Collections.Generic;
+using StudentManagementSystem.Services;
 
 namespace StudentManagementSystem.Models
 {
     public class QuanLyDangKy
     {
-        private readonly List<DangKyHoc> _danhSachDangKy;
+        private readonly DangKyHocService _dangKyHocService;
 
         public QuanLyDangKy()
         {
-            _danhSachDangKy = new List<DangKyHoc>();
+            _dangKyHocService = new DangKyHocService();
         }
 
         public DangKyHoc DangKyMonHoc(SinhVien sinhVien, MonHoc monHoc, HocKy hocKy)
         {
-            if (sinhVien == null)
-            {
-                throw new ArgumentNullException(nameof(sinhVien));
-            }
+            return _dangKyHocService.DangKyMonHoc(sinhVien, monHoc, hocKy);
+        }
 
-            if (monHoc == null)
-            {
-                throw new ArgumentNullException(nameof(monHoc));
-            }
-
-            if (hocKy == null)
-            {
-                throw new ArgumentNullException(nameof(hocKy));
-            }
-
-            DangKyHoc dangKyHoc = new DangKyHoc(sinhVien, monHoc, hocKy);
-            _danhSachDangKy.Add(dangKyHoc);
-            return dangKyHoc;
+        public DangKyHoc DangKyMonHocHeChatLuongCao(SinhVien sinhVien, MonHoc monHoc, HocKy hocKy)
+        {
+            return _dangKyHocService.DangKyMonHocHeChatLuongCao(sinhVien, monHoc, hocKy);
         }
 
         public void NhapDiem(DangKyHoc dangKyHoc, float diem)
         {
-            if (dangKyHoc == null)
-            {
-                throw new ArgumentNullException(nameof(dangKyHoc));
-            }
-
-            dangKyHoc.NhapDiem(diem);
+            _dangKyHocService.NhapDiem(dangKyHoc, diem);
         }
 
         public string TinhKetQua(DangKyHoc dangKyHoc)
         {
-            if (dangKyHoc == null)
-            {
-                throw new ArgumentNullException(nameof(dangKyHoc));
-            }
-
-            dangKyHoc.TinhKetQua();
-            return dangKyHoc.KetQua;
+            return _dangKyHocService.TinhKetQua(dangKyHoc);
         }
 
         public IReadOnlyList<DangKyHoc> LayDanhSachDangKy()
         {
-            return _danhSachDangKy.AsReadOnly();
+            return _dangKyHocService.LayTatCa();
         }
     }
 }

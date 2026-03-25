@@ -2,40 +2,59 @@ using System;
 
 namespace StudentManagementSystem.Models
 {
-    // Abstraction: lớp trừu tượng mô tả thông tin chung của mọi người dùng.
     public abstract class Nguoi
     {
-        public string Id { get; protected set; }
-        public string HoTen { get; protected set; }
-        public string Email { get; protected set; }
+        private string _id;
+        private string _hoTen;
+        private string _email;
+
+        public string Id
+        {
+            get { return _id; }
+        }
+
+        public string HoTen
+        {
+            get { return _hoTen; }
+        }
+
+        public string Email
+        {
+            get { return _email; }
+        }
 
         protected Nguoi(string id, string hoTen, string email)
         {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                throw new ArgumentException("Id không được để trống.", nameof(id));
-            }
-
-            if (string.IsNullOrWhiteSpace(hoTen))
-            {
-                throw new ArgumentException("Họ tên không được để trống.", nameof(hoTen));
-            }
-
-            if (string.IsNullOrWhiteSpace(email))
-            {
-                throw new ArgumentException("Email không được để trống.", nameof(email));
-            }
-
-            Id = id;
-            HoTen = hoTen;
-            Email = email;
+            _id = KiemTraChuoiBatBuoc(id, nameof(id), "Id không được để trống.");
+            _hoTen = KiemTraChuoiBatBuoc(hoTen, nameof(hoTen), "Họ tên không được để trống.");
+            _email = KiemTraChuoiBatBuoc(email, nameof(email), "Email không được để trống.");
         }
 
         public abstract string LayVaiTro();
 
+        protected void CapNhatHoTen(string hoTenMoi)
+        {
+            _hoTen = KiemTraChuoiBatBuoc(hoTenMoi, nameof(hoTenMoi), "Họ tên không được để trống.");
+        }
+
+        protected void CapNhatEmail(string emailMoi)
+        {
+            _email = KiemTraChuoiBatBuoc(emailMoi, nameof(emailMoi), "Email không được để trống.");
+        }
+
         public virtual string HienThiThongTin()
         {
-            return $"ID: {Id}, Họ tên: {HoTen}, Email: {Email}";
+            return "ID: " + _id + ", Họ tên: " + _hoTen + ", Email: " + _email;
+        }
+
+        private static string KiemTraChuoiBatBuoc(string giaTri, string thamSo, string thongDiep)
+        {
+            if (string.IsNullOrWhiteSpace(giaTri))
+            {
+                throw new ArgumentException(thongDiep, thamSo);
+            }
+
+            return giaTri.Trim();
         }
     }
 }
