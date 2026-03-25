@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng ký</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <main class="auth-layout">
+      <section class="auth-shell glass-card">
+        <article class="auth-panel">
+          <h1>Tạo tài khoản mới</h1>
+          <p>Đăng ký để truy cập bảng điều khiển quản lý sinh viên.</p>
+          <form id="registerForm" class="auth-form" novalidate>
+            <label>Họ và tên
+              <input id="fullName" type="text" required minlength="2" autocomplete="name" />
+              <small id="fullNameError" class="field-error" hidden>Họ tên cần ít nhất 2 ký tự.</small>
+            </label>
+            <label>Email
+              <input id="email" type="email" required placeholder="you@example.com" autocomplete="email" />
+              <small id="emailError" class="field-error" hidden>Vui lòng nhập email hợp lệ.</small>
+            </label>
+            <label>Mật khẩu
+              <div class="password-wrap">
+                <input id="password" type="password" required minlength="3" autocomplete="new-password" />
+                <button id="togglePasswordBtn" type="button" class="password-toggle" aria-label="Hiện mật khẩu">Hiện</button>
+              </div>
+              <div class="password-strength" aria-live="polite">
+                <div id="passwordStrengthBar" class="password-strength-bar"></div>
+                <span id="passwordStrengthText" class="password-strength-text">Mức độ: Chưa nhập</span>
+              </div>
+              <ul class="password-checklist" id="passwordChecklist">
+                <li id="ruleLen">Ít nhất 8 ký tự</li>
+                <li id="ruleCase">Có cả chữ hoa và chữ thường</li>
+                <li id="ruleNum">Có ít nhất 1 chữ số</li>
+                <li id="ruleSpec">Có ít nhất 1 ký tự đặc biệt</li>
+              </ul>
+              <small id="passwordError" class="field-error" hidden>Mật khẩu cần ít nhất 3 ký tự.</small>
+            </label>
+            <label>Nhập lại mật khẩu
+              <input id="confirmPassword" type="password" required minlength="3" autocomplete="new-password" />
+              <small id="confirmPasswordError" class="field-error" hidden>Mật khẩu xác nhận chưa khớp.</small>
+            </label>
+            <button id="registerSubmitBtn" type="submit" class="btn-brand auth-btn">Đăng ký</button>
+          </form>
+          <div id="message" class="auth-message"></div>
+          <a class="auth-link" href="login.html">Đã có tài khoản? Đăng nhập.</a>
+        </article>
+
+        <aside class="auth-side">
+          <h2>Bắt đầu quản trị học vụ trong vài phút</h2>
+          <ul>
+            <li>Tạo tài khoản mới và truy cập dashboard tức thì.</li>
+            <li>Quản lý sinh viên, môn học, học kỳ và đăng ký tập trung.</li>
+            <li>Trải nghiệm tìm kiếm, lọc và thao tác nhanh trên mọi bảng.</li>
+          </ul>
+          <div class="auth-side-metrics">
+            <div><strong>Onboarding</strong><span>Thiết lập nhanh</span></div>
+            <div><strong>Realtime</strong><span>Dữ liệu cập nhật</span></div>
+            <div><strong>Secure</strong><span>Phiên đăng nhập an toàn</span></div>
+          </div>
+        </aside>
+      </section>
+    </main>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/auth-ui.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/register.js"></script>
+  </body>
+</html>

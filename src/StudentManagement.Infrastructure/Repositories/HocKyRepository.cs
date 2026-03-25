@@ -21,7 +21,7 @@ public class HocKyRepository : IHocKyRepository
         _dbContext.HocKys.FirstOrDefaultAsync(x => x.HocKyId == id);
 
     public Task<HocKy?> GetByMaHocKyAsync(string maHocKy) =>
-        _dbContext.HocKys.FirstOrDefaultAsync(x => x.MaHocKy == maHocKy);
+        _dbContext.HocKys.AsNoTracking().FirstOrDefaultAsync(x => x.MaHocKy == maHocKy);
 
     public Task AddAsync(HocKy entity) => _dbContext.HocKys.AddAsync(entity).AsTask();
 

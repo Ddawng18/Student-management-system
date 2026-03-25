@@ -1,9 +1,69 @@
 namespace StudentManagement.Application.DTOs;
 
-public record SinhVienDto(int SinhVienId, string MaSinhVien, string HoTen, string Email, DateTime NgaySinh, int? LopHocId);
+public record SinhVienDto(
+	int SinhVienId,
+	string MaSinhVien,
+	string HoTen,
+	string Email,
+	DateTime NgaySinh,
+	int? LopHocId,
+	string? AvatarUrl,
+	string? GioiTinh,
+	string? QueQuan,
+	string? SoDienThoai,
+	string? DiaChiThuongTru,
+	string? NoiTamTru,
+	string? DanToc,
+	string? TonGiao,
+	string? Cccd,
+	DateTime? NgayCapCccd,
+	string? NoiCapCccd,
+	string? HoTenPhuHuynh,
+	string? SoDienThoaiPhuHuynh,
+	string? NgheNghiepPhuHuynh,
+	string? GhiChu);
 
-public record CreateSinhVienRequest(string MaSinhVien, string HoTen, string Email, DateTime NgaySinh, int? LopHocId);
+public record CreateSinhVienRequest(
+	string MaSinhVien,
+	string HoTen,
+	string Email,
+	DateTime NgaySinh,
+	int? LopHocId,
+	string? AvatarUrl,
+	string? GioiTinh,
+	string? QueQuan,
+	string? SoDienThoai,
+	string? DiaChiThuongTru,
+	string? NoiTamTru,
+	string? DanToc,
+	string? TonGiao,
+	string? Cccd,
+	DateTime? NgayCapCccd,
+	string? NoiCapCccd,
+	string? HoTenPhuHuynh,
+	string? SoDienThoaiPhuHuynh,
+	string? NgheNghiepPhuHuynh,
+	string? GhiChu);
 
-public record UpdateSinhVienRequest(string HoTen, string Email, DateTime NgaySinh, int? LopHocId);
+public record UpdateSinhVienRequest(
+	string HoTen,
+	string Email,
+	DateTime NgaySinh,
+	int? LopHocId,
+	string? AvatarUrl,
+	string? GioiTinh,
+	string? QueQuan,
+	string? SoDienThoai,
+	string? DiaChiThuongTru,
+	string? NoiTamTru,
+	string? DanToc,
+	string? TonGiao,
+	string? Cccd,
+	DateTime? NgayCapCccd,
+	string? NoiCapCccd,
+	string? HoTenPhuHuynh,
+	string? SoDienThoaiPhuHuynh,
+	string? NgheNghiepPhuHuynh,
+	string? GhiChu);
 
 public record KetQuaHocTapDto(int DangKyHocId, int MonHocId, string TenMon, int HocKyId, string TenHocKy, int NamHoc, decimal? Diem, string KetQua);

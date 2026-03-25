@@ -16,6 +16,7 @@ public class AppDbContext : DbContext
     public DbSet<HocKy> HocKys => Set<HocKy>();
     public DbSet<MonHoc> MonHocs => Set<MonHoc>();
     public DbSet<DangKyHoc> DangKyHocs => Set<DangKyHoc>();
+    public DbSet<TaiKhoanNguoiDung> TaiKhoanNguoiDungs => Set<TaiKhoanNguoiDung>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -77,6 +78,20 @@ public class AppDbContext : DbContext
             entity.Property(x => x.MaSinhVien).HasMaxLength(20).IsRequired();
             entity.Property(x => x.HoTen).HasMaxLength(150).IsRequired();
             entity.Property(x => x.Email).HasMaxLength(255).IsRequired();
+            entity.Property(x => x.AvatarUrl).HasMaxLength(2048);
+            entity.Property(x => x.GioiTinh).HasMaxLength(20);
+            entity.Property(x => x.QueQuan).HasMaxLength(255);
+            entity.Property(x => x.SoDienThoai).HasMaxLength(20);
+            entity.Property(x => x.DiaChiThuongTru).HasMaxLength(500);
+            entity.Property(x => x.NoiTamTru).HasMaxLength(500);
+            entity.Property(x => x.DanToc).HasMaxLength(100);
+            entity.Property(x => x.TonGiao).HasMaxLength(100);
+            entity.Property(x => x.Cccd).HasMaxLength(20);
+            entity.Property(x => x.NoiCapCccd).HasMaxLength(255);
+            entity.Property(x => x.HoTenPhuHuynh).HasMaxLength(150);
+            entity.Property(x => x.SoDienThoaiPhuHuynh).HasMaxLength(20);
+            entity.Property(x => x.NgheNghiepPhuHuynh).HasMaxLength(150);
+            entity.Property(x => x.GhiChu).HasMaxLength(2000);
             entity.HasIndex(x => x.MaSinhVien).IsUnique();
             entity.HasIndex(x => x.Email).IsUnique();
 
@@ -151,6 +166,17 @@ public class AppDbContext : DbContext
                 .WithMany(x => x.DangKyHocs)
                 .HasForeignKey(x => x.HocKyId)
                 .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<TaiKhoanNguoiDung>(entity =>
+        {
+            entity.ToTable("TaiKhoanNguoiDung");
+            entity.HasKey(x => x.TaiKhoanNguoiDungId);
+            entity.Property(x => x.HoTen).HasMaxLength(150).IsRequired();
+            entity.Property(x => x.Email).HasMaxLength(255).IsRequired();
+            entity.Property(x => x.MatKhauHash).HasMaxLength(128).IsRequired();
+            entity.Property(x => x.VaiTro).HasMaxLength(20).IsRequired();
+            entity.HasIndex(x => x.Email).IsUnique();
         });
     }
 

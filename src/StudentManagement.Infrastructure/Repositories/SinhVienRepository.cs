@@ -21,7 +21,7 @@ public class SinhVienRepository : ISinhVienRepository
         _dbContext.SinhViens.FirstOrDefaultAsync(x => x.SinhVienId == id);
 
     public Task<SinhVien?> GetByMaSinhVienAsync(string maSinhVien) =>
-        _dbContext.SinhViens.FirstOrDefaultAsync(x => x.MaSinhVien == maSinhVien);
+        _dbContext.SinhViens.AsNoTracking().FirstOrDefaultAsync(x => x.MaSinhVien == maSinhVien);
 
     public Task<List<SinhVien>> SearchByKeywordAsync(string keyword) =>
         _dbContext.SinhViens

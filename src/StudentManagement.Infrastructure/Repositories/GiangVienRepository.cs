@@ -21,7 +21,7 @@ public class GiangVienRepository : IGiangVienRepository
         _dbContext.GiangViens.FirstOrDefaultAsync(x => x.GiangVienId == id);
 
     public Task<GiangVien?> GetByMaGiangVienAsync(string maGiangVien) =>
-        _dbContext.GiangViens.FirstOrDefaultAsync(x => x.MaGiangVien == maGiangVien);
+        _dbContext.GiangViens.AsNoTracking().FirstOrDefaultAsync(x => x.MaGiangVien == maGiangVien);
 
     public Task AddAsync(GiangVien entity) => _dbContext.GiangViens.AddAsync(entity).AsTask();
 

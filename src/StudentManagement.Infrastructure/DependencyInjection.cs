@@ -24,6 +24,7 @@ public static class DependencyInjection
         services.AddScoped<IHocKyRepository, HocKyRepository>();
         services.AddScoped<IMonHocRepository, MonHocRepository>();
         services.AddScoped<IDangKyHocRepository, DangKyHocRepository>();
+        services.AddScoped<ITaiKhoanNguoiDungRepository, TaiKhoanNguoiDungRepository>();
 
         return services;
     }

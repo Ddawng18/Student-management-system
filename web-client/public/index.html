@@ -1,8 +1,166 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
-    <meta http-equiv="refresh" content="0; url=/dashboard.html" />
-    <title>Student Management</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hệ thống quản lý sinh viên</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
-  <body></body>
+  <body class="intro-body">
+    <main class="intro-layout">
+      <section class="intro-card reveal-item">
+        <div class="intro-hero-grid">
+          <div class="intro-hero-copy">
+            <p class="intro-badge">Nền tảng quản trị giáo dục</p>
+            <h1>Hệ thống quản lý sinh viên thông minh, rõ ràng và tốc độ</h1>
+            <p class="intro-desc">
+              Quản lý sinh viên, lớp học, môn học, đăng ký và điểm số trên một dashboard trực quan.
+              Tối ưu cho thao tác hàng ngày của phòng đào tạo và cố vấn học tập.
+            </p>
+            <div class="intro-actions intro-hero-actions mb-3">
+              <a class="btn btn-brand intro-btn intro-btn-login" href="login.html">Đăng nhập ngay</a>
+              <a class="btn intro-btn intro-btn-register" href="register.html">Tạo tài khoản</a>
+              <a id="goDashboard" class="btn intro-btn intro-btn-dashboard" href="dashboard.html">Xem bảng điều khiển</a>
+              <button id="introLogoutBtn" type="button" class="btn intro-btn intro-btn-dashboard" hidden>Đăng xuất</button>
+            </div>
+          </div>
+          <aside class="intro-preview reveal-item" style="--delay:0.12s" aria-label="Mô phỏng dashboard">
+            <header class="intro-preview-head">
+              <strong>Dashboard học vụ</strong>
+              <span>Realtime</span>
+            </header>
+            <div class="intro-preview-stats">
+              <div>
+                <small>Sinh viên</small>
+                <b data-countup="1248" data-format="integer">0</b>
+              </div>
+              <div>
+                <small>Tỷ lệ đạt</small>
+                <b data-countup="92.6" data-format="decimal" data-suffix="%">0%</b>
+              </div>
+            </div>
+            <div class="intro-preview-bars" aria-hidden="true">
+              <span class="intro-bar" style="--h:44%;--bar-delay:120ms"></span>
+              <span class="intro-bar" style="--h:67%;--bar-delay:170ms"></span>
+              <span class="intro-bar" style="--h:58%;--bar-delay:220ms"></span>
+              <span class="intro-bar" style="--h:82%;--bar-delay:270ms"></span>
+              <span class="intro-bar" style="--h:74%;--bar-delay:320ms"></span>
+              <span class="intro-bar" style="--h:90%;--bar-delay:370ms"></span>
+              <span class="intro-bar" style="--h:86%;--bar-delay:420ms"></span>
+            </div>
+            <p class="intro-preview-foot">Xu hướng đăng ký 7 ngày gần nhất</p>
+          </aside>
+        </div>
+        <div class="intro-metrics">
+          <div class="metric-item reveal-item" style="--delay:0.05s"><span class="metric-value">6+</span><span class="metric-label">Phân hệ nghiệp vụ</span></div>
+          <div class="metric-item reveal-item" style="--delay:0.1s"><span class="metric-value">1</span><span class="metric-label">Bảng điều khiển tổng hợp</span></div>
+          <div class="metric-item reveal-item" style="--delay:0.15s"><span class="metric-value">100%</span><span class="metric-label">Tối ưu nhập liệu nhanh</span></div>
+        </div>
+      </section>
+
+      <section class="intro-section reveal-item" style="--delay:0.2s">
+        <h2>Điểm nổi bật</h2>
+        <div class="feature-grid">
+          <article class="feature-card reveal-item" style="--delay:0.25s">
+            <h3>Dashboard trực quan</h3>
+            <p>KPI, tỷ lệ đạt, điểm trung bình, xu hướng đăng ký 7 ngày gần nhất và môn học nổi bật.</p>
+          </article>
+          <article class="feature-card reveal-item" style="--delay:0.3s">
+            <h3>CRUD siêu nhanh</h3>
+            <p>Thêm, sửa, xóa ngay trên form với phím tắt Esc và Cmd/Ctrl+S cho người dùng chuyên sâu.</p>
+          </article>
+          <article class="feature-card reveal-item" style="--delay:0.35s">
+            <h3>Bảo mật phiên làm việc</h3>
+            <p>Đăng nhập, đăng ký, quản lý phiên và điều hướng theo trạng thái truy cập.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="intro-section reveal-item" style="--delay:0.4s">
+        <h2>Quy trình sử dụng</h2>
+        <div class="flow-grid">
+          <div class="flow-step"><span>1</span><p>Đăng nhập bằng tài khoản quản trị hoặc người dùng.</p></div>
+          <div class="flow-step"><span>2</span><p>Thiết lập khoa, lớp, học kỳ, môn học theo năm học.</p></div>
+          <div class="flow-step"><span>3</span><p>Quản lý sinh viên, đăng ký và theo dõi kết quả học tập.</p></div>
+        </div>
+      </section>
+
+      <section class="intro-cta reveal-item" style="--delay:0.45s">
+        <h2>Sẵn sàng vận hành học vụ chỉ trong vài phút?</h2>
+        <p>Khởi động với dữ liệu mẫu, trải nghiệm luồng quản trị hoàn chỉnh và mở rộng dần theo thực tế đơn vị.</p>
+        <div class="intro-actions">
+          <a class="btn btn-brand intro-btn" href="dashboard.html">Mở hệ thống</a>
+          <a class="btn btn-outline-light intro-btn" href="login.html">Đăng nhập quản trị</a>
+        </div>
+      </section>
+    </main>
+    <script>
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function animatePreviewCount(el) {
+        const target = Number(el.dataset.countup || 0);
+        if (!Number.isFinite(target) || target <= 0) {
+          return;
+        }
+
+        const format = el.dataset.format || "integer";
+        const suffix = el.dataset.suffix || "";
+        const decimals = format === "decimal" ? 1 : 0;
+
+        if (prefersReducedMotion) {
+          const finalValue = format === "decimal" ? target.toFixed(1) : Math.round(target).toLocaleString("vi-VN");
+          el.textContent = `${finalValue}${suffix}`;
+          return;
+        }
+
+        const duration = 900;
+        const startedAt = performance.now();
+
+        function tick(now) {
+          const progress = Math.min((now - startedAt) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const value = target * eased;
+          const rendered = format === "decimal" ? value.toFixed(1) : Math.round(value).toLocaleString("vi-VN");
+          el.textContent = `${rendered}${suffix}`;
+
+          if (progress < 1) {
+            requestAnimationFrame(tick);
+          }
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      function animatePreviewCounts() {
+        document.querySelectorAll("[data-countup]").forEach((el) => {
+          animatePreviewCount(el);
+        });
+      }
+
+      const hasSession = !!localStorage.getItem("sms_auth");
+      if (!hasSession) {
+        const dashboardBtn = document.getElementById("goDashboard");
+        dashboardBtn.href = "login.html";
+      } else {
+        const logoutBtn = document.getElementById("introLogoutBtn");
+        if (logoutBtn) {
+          logoutBtn.hidden = false;
+          logoutBtn.addEventListener("click", () => {
+            localStorage.removeItem("sms_auth");
+            window.location.href = "login.html";
+          });
+        }
+      }
+
+      window.requestAnimationFrame(() => {
+        document.querySelectorAll(".reveal-item").forEach((el) => {
+          el.classList.add("is-visible");
+        });
+        animatePreviewCounts();
+      });
+    </script>
+  </body>
 </html>

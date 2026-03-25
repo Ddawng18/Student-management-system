@@ -12,15 +12,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 				const avg = validScores.length
 					? (validScores.reduce((sum, score) => sum + score, 0) / validScores.length).toFixed(2)
-					: "Chua co";
+					: "Chưa có";
 
-				let rank = "Dang hoc";
-				if (avg !== "Chua co") {
+				let rank = "Đang học";
+				if (avg !== "Chưa có") {
 					const avgNum = Number(avg);
-					if (avgNum >= 8) rank = "Gioi";
-					else if (avgNum >= 6.5) rank = "Kha";
-					else if (avgNum >= 5) rank = "Trung binh";
-					else rank = "Yeu";
+					if (avgNum >= 8) rank = "Giỏi";
+					else if (avgNum >= 6.5) rank = "Khá";
+					else if (avgNum >= 5) rank = "Trung bình";
+					else rank = "Yếu";
 				}
 
 				return [student.maSinhVien, student.hoTen, results.length, avg, rank];
@@ -29,6 +29,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 		renderTableRows("resultsTable", rows);
 	} catch (error) {
-		showPageMessage(`Khong tai duoc ket qua hoc tap: ${error.message}`, "danger");
+		showPageMessage(`Không tải được kết quả học tập: ${error.message}`, "danger");
 	}
 });

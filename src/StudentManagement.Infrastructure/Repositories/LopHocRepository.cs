@@ -21,7 +21,7 @@ public class LopHocRepository : ILopHocRepository
         _dbContext.LopHocs.FirstOrDefaultAsync(x => x.LopHocId == id);
 
     public Task<LopHoc?> GetByMaLopAsync(string maLop) =>
-        _dbContext.LopHocs.FirstOrDefaultAsync(x => x.MaLop == maLop);
+        _dbContext.LopHocs.AsNoTracking().FirstOrDefaultAsync(x => x.MaLop == maLop);
 
     public Task AddAsync(LopHoc entity) => _dbContext.LopHocs.AddAsync(entity).AsTask();
 

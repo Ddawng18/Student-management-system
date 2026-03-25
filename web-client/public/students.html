@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sinh vien</title>
+    <title>Sinh viên</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
@@ -18,14 +18,25 @@
   <script src="assets/js/shell.js"></script>
   <script>
     renderPageShell({
-      title: "Quan ly sinh vien",
-      cardTitle: "Danh sach sinh vien",
-      buttonText: "Them sinh vien",
-      columns: ["Ma SV", "Ho ten", "Email", "Lop", "Ngay sinh"],
+      title: "Quản lý sinh viên",
+      cardTitle: "Danh sách sinh viên",
+      buttonText: "Thêm sinh viên",
+      extraToolsHtml: `
+        <div style="display: flex; gap: 10px; flex: 1; max-width: 300px;">
+          <select id="studentDepartmentFilter" class="form-control page-filter-select" style="flex: 1; min-width: 140px;">
+            <option value="all">Tất cả khoa</option>
+          </select>
+          <select id="studentClassFilter" class="form-control page-filter-select" style="flex: 1; min-width: 140px;">
+            <option value="all">Tất cả lớp</option>
+          </select>
+        </div>
+      `,
+      columns: ["Mã SV", "Họ tên", "Email", "Lớp", "Ngày sinh", "Thao tác"],
       tableId: "studentsTable"
     });
   </script>
+  <script src="assets/js/auth.js"></script>
   <script src="assets/js/common.js"></script>
-    <script src="assets/js/api.js"></script>
+  <script src="assets/js/api.js"></script>
   <script src="assets/js/students.js"></script>
 </html>

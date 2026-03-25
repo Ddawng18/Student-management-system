@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <main class="auth-layout">
+      <section class="auth-shell glass-card">
+        <article class="auth-panel">
+          <h1>Đăng nhập hệ thống</h1>
+          <p>Quản lý sinh viên theo thời gian thực, trực quan và hiện đại.</p>
+          <form id="loginForm" class="auth-form" novalidate>
+            <label>Tên đăng nhập hoặc email
+              <input id="email" type="text" required placeholder="ex@example.com" autocomplete="username" />
+              <small id="emailError" class="field-error" hidden>Vui lòng nhập tên đăng nhập hoặc email hợp lệ.</small>
+            </label>
+            <label>Mật khẩu
+              <div class="password-wrap">
+                <input id="password" type="password" required minlength="3" autocomplete="current-password" />
+                <button id="togglePasswordBtn" type="button" class="password-toggle" aria-label="Hiện mật khẩu">Hiện</button>
+              </div>
+              <small id="passwordError" class="field-error" hidden>Mật khẩu cần ít nhất 3 ký tự.</small>
+            </label>
+            <div class="auth-form-row">
+              <label class="check-inline"><input id="rememberUser" type="checkbox" /> Ghi nhớ tài khoản</label>
+              <a class="auth-mini-link" href="register.html">Tạo tài khoản mới</a>
+            </div>
+            <button id="loginSubmitBtn" type="submit" class="btn-brand auth-btn">Đăng nhập</button>
+          </form>
+          <div id="message" class="auth-message"></div>
+          <a class="auth-link" href="register.html">Chưa có tài khoản? Đăng ký ngay.</a>
+        </article>
+
+        <aside class="auth-side">
+          <h2>Đăng nhập 1 lần, quản trị toàn bộ học vụ</h2>
+          <ul>
+            <li>Theo dõi KPI và tiến độ học tập theo học kỳ.</li>
+            <li>Thêm, sửa, xóa dữ liệu nhanh với form thông minh.</li>
+            <li>Quản lý đăng ký, điểm số và kết quả tập trung.</li>
+          </ul>
+          <div class="auth-side-metrics">
+            <div><strong>6+</strong><span>Phân hệ nghiệp vụ</span></div>
+            <div><strong>7 ngày</strong><span>Xu hướng realtime</span></div>
+            <div><strong>1 bảng</strong><span>Dashboard tổng quan</span></div>
+          </div>
+        </aside>
+      </section>
+    </main>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/auth-ui.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/login.js"></script>
+  </body>
+</html>

@@ -15,10 +15,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           method: "PUT",
           body: JSON.stringify({ diem })
         });
-        showPageMessage("Nhap diem thanh cong.", "success");
+        showPageMessage("Nhập điểm thành công.", "success");
         window.location.reload();
       } catch (error) {
-        showPageMessage(`Nhap diem that bai: ${error.message}`, "danger");
+        showPageMessage(`Nhập điểm thất bại: ${error.message}`, "danger");
       }
     });
   }
@@ -28,6 +28,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const rows = enrollments.map((x) => [x.sinhVienHoTen, x.tenMonHoc, x.diem ?? "-", x.ketQua]);
     renderTableRows("gradesTable", rows);
   } catch (error) {
-    showPageMessage(`Khong tai duoc bang diem: ${error.message}`, "danger");
+    showPageMessage(`Không tải được bảng điểm: ${error.message}`, "danger");
   }
 });

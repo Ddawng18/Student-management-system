@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hồ sơ sinh viên</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body class="student-profile-body">
+    <main class="student-profile-layout">
+      <section class="student-profile-card">
+        <div class="student-profile-head">
+          <a href="students.html" class="btn btn-outline-secondary"><i class="fas fa-arrow-left mr-1"></i>Quay lại danh sách</a>
+          <button id="saveProfileBtn" class="btn btn-brand"><i class="fas fa-floppy-disk mr-1"></i>Lưu hồ sơ</button>
+        </div>
+
+        <div id="profileAlertHost"></div>
+
+        <div class="student-profile-hero">
+          <div class="student-avatar-wrap">
+            <img id="profileAvatar" class="student-avatar" alt="Ảnh đại diện sinh viên" />
+            <label class="btn btn-sm btn-outline-primary mt-2 mb-0" for="avatarInput">Đổi ảnh</label>
+            <input id="avatarInput" type="file" accept="image/*" class="d-none" />
+          </div>
+          <div class="student-identity">
+            <h1 id="profileName">Hồ sơ sinh viên</h1>
+            <p id="profileSubline" class="student-subline">Đang tải dữ liệu...</p>
+            <div class="student-chip-list">
+              <span id="profileChipClass" class="student-chip">Lớp: -</span>
+              <span id="profileChipBirth" class="student-chip">Ngày sinh: -</span>
+              <span id="profileChipHometown" class="student-chip">Quê quán: -</span>
+            </div>
+          </div>
+        </div>
+
+        <form id="studentProfileForm" class="student-profile-grid" novalidate>
+          <div class="profile-section">
+            <h2>Thông tin cơ bản</h2>
+            <div class="profile-grid-2">
+              <label>Mã sinh viên
+                <input id="maSinhVien" class="form-control" type="text" readonly />
+              </label>
+              <label>Họ và tên
+                <input id="hoTen" class="form-control" type="text" required />
+              </label>
+              <label>Email
+                <input id="email" class="form-control" type="email" required />
+              </label>
+              <label>Ngày sinh
+                <input id="ngaySinh" class="form-control" type="date" required />
+              </label>
+              <label>Lớp hiện tại
+                <input id="lopHoc" class="form-control" type="text" readonly />
+              </label>
+              <label>Giới tính
+                <select id="gioiTinh" class="form-control">
+                  <option value="">Chưa cập nhật</option>
+                  <option value="Nam">Nam</option>
+                  <option value="Nữ">Nữ</option>
+                  <option value="Khác">Khác</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <h2>Thông tin cá nhân chi tiết</h2>
+            <div class="profile-grid-2">
+              <label>Quê quán
+                <input id="queQuan" class="form-control" type="text" placeholder="Ví dụ: Nam Định" />
+              </label>
+              <label>Số điện thoại
+                <input id="soDienThoai" class="form-control" type="text" placeholder="09xx xxx xxx" />
+              </label>
+              <label>Dân tộc
+                <input id="danToc" class="form-control" type="text" placeholder="Ví dụ: Kinh" />
+              </label>
+              <label>Tôn giáo
+                <input id="tonGiao" class="form-control" type="text" placeholder="Ví dụ: Không" />
+              </label>
+              <label>Số CCCD
+                <input id="cccd" class="form-control" type="text" placeholder="12 số CCCD" />
+              </label>
+              <label>Ngày cấp CCCD
+                <input id="ngayCapCccd" class="form-control" type="date" />
+              </label>
+              <label>Nơi cấp CCCD
+                <input id="noiCapCccd" class="form-control" type="text" placeholder="Cục CSQLHC về TTXH" />
+              </label>
+              <label>Nơi tạm trú
+                <input id="noiTamTru" class="form-control" type="text" placeholder="Địa chỉ hiện tại" />
+              </label>
+            </div>
+            <label>Địa chỉ thường trú
+              <textarea id="diaChiThuongTru" class="form-control" rows="2" placeholder="Số nhà, xã/phường, quận/huyện, tỉnh/thành"></textarea>
+            </label>
+          </div>
+
+          <div class="profile-section">
+            <h2>Thông tin phụ huynh</h2>
+            <div class="profile-grid-2">
+              <label>Họ tên phụ huynh
+                <input id="hoTenPhuHuynh" class="form-control" type="text" placeholder="Ví dụ: Nguyễn Văn A" />
+              </label>
+              <label>SĐT phụ huynh
+                <input id="soDienThoaiPhuHuynh" class="form-control" type="text" placeholder="09xx xxx xxx" />
+              </label>
+              <label>Nghề nghiệp phụ huynh
+                <input id="ngheNghiepPhuHuynh" class="form-control" type="text" placeholder="Ví dụ: Kinh doanh" />
+              </label>
+            </div>
+            <label>Ghi chú thêm
+              <textarea id="ghiChu" class="form-control" rows="3" placeholder="Thành tích, lưu ý sức khỏe, thông tin bổ sung..."></textarea>
+            </label>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/student-profile.js"></script>
+  </body>
+</html>

@@ -21,7 +21,7 @@ public class MonHocRepository : IMonHocRepository
         _dbContext.MonHocs.FirstOrDefaultAsync(x => x.MonHocId == id);
 
     public Task<MonHoc?> GetByMaMonHocAsync(string maMonHoc) =>
-        _dbContext.MonHocs.FirstOrDefaultAsync(x => x.MaMonHoc == maMonHoc);
+        _dbContext.MonHocs.AsNoTracking().FirstOrDefaultAsync(x => x.MaMonHoc == maMonHoc);
 
     public Task AddAsync(MonHoc entity) => _dbContext.MonHocs.AddAsync(entity).AsTask();
 

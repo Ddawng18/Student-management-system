@@ -15,6 +15,7 @@ public static class DependencyInjection
         services.AddScoped<IHocKyService, HocKyService>();
         services.AddScoped<IQuanLyMonHocService, QuanLyMonHocService>();
         services.AddScoped<IQuanLyDangKyService, QuanLyDangKyService>();
+        services.AddScoped<IAuthService, AuthService>();
 
         return services;
     }

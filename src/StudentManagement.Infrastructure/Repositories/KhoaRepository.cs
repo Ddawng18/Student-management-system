@@ -21,7 +21,7 @@ public class KhoaRepository : IKhoaRepository
         _dbContext.Khoas.FirstOrDefaultAsync(x => x.KhoaId == id);
 
     public Task<Khoa?> GetByMaKhoaAsync(string maKhoa) =>
-        _dbContext.Khoas.FirstOrDefaultAsync(x => x.MaKhoa == maKhoa);
+        _dbContext.Khoas.AsNoTracking().FirstOrDefaultAsync(x => x.MaKhoa == maKhoa);
 
     public Task AddAsync(Khoa entity) => _dbContext.Khoas.AddAsync(entity).AsTask();
 

@@ -1,5 +1,50 @@
 # Hệ thống quản lý sinh viên (Student Management System)
 
+## Cách chạy dự án
+
+### Yêu cầu môi trường
+- .NET SDK 9.0+
+- Node.js 18+ và npm
+
+### 1. Chạy Backend API
+Từ thư mục gốc dự án:
+
+```bash
+dotnet restore src/StudentManagement.Api/StudentManagement.Api.csproj
+dotnet run --project src/StudentManagement.Api/StudentManagement.Api.csproj --urls http://localhost:5019
+```
+
+API và static web sẽ chạy tại: `http://localhost:5019`
+
+### 2. Chạy Frontend (dev mode, tùy chọn)
+Mở terminal khác:
+
+```bash
+cd web-client
+npm install
+npm run dev
+```
+
+Nếu dùng bản static do API phục vụ sẵn thì chỉ cần chạy backend là đủ.
+
+### 3. Kiểm tra nhanh
+- Health check: `http://localhost:5019/health`
+- Swagger (môi trường Development): `http://localhost:5019/swagger`
+- Dashboard: `http://localhost:5019/dashboard.html`
+- Danh sách sinh viên: `http://localhost:5019/students.html`
+
+### 4. Tài khoản mặc định
+- Tài khoản: `admin123`
+- Mật khẩu: `123`
+
+### 5. Dữ liệu mẫu
+Hệ thống tự seed dữ liệu demo khi khởi động, bao gồm:
+- Khoa, lớp, giảng viên, môn học, học kỳ
+- 100 sinh viên mẫu (`SV001` đến `SV100`)
+- Một số bản ghi đăng ký học để hiển thị dashboard
+
+---
+
 ## Giới thiệu
 Student Management System là một chương trình hỗ trợ quản lý thông tin sinh viên một cách hiệu quả và có hệ thống. Ứng dụng cho phép lưu trữ, cập nhật và tra cứu các dữ liệu cơ bản của sinh viên như mã sinh viên, họ tên, lớp, chuyên ngành và kết quả học tập.
 
@@ -185,8 +230,8 @@ Hệ thống có thể được mở rộng thêm:
 ---
 
 ## Ghi chú
-Dự án hiện tập trung vào **phân tích và thiết kế hệ thống**, chưa triển khai chi tiết phần giao diện và cơ sở dữ liệu.  
-Thiết kế trong dự án có thể được sử dụng trực tiếp làm nền tảng để phát triển ứng dụng hoàn chỉnh.
+Dự án hiện đã có backend API (.NET) và frontend web để thao tác dữ liệu thực tế.  
+Phần phân tích và thiết kế OOP vẫn được giữ lại làm tài liệu nền tảng để mở rộng hệ thống.
 
 ---
 
